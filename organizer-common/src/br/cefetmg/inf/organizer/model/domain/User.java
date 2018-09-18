@@ -53,5 +53,5 @@ public class User {
     public void setUserPhoto(File userPhoto) {
         this.userPhoto = userPhoto;
     }
-    
+
 }
