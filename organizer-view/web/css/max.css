@@ -1,0 +1,170 @@
+/* 
+    Created on : 30/07/2018, 11:12:19
+    Author     : Ruan Bertuce
+*/
+
+body {
+    color: #fff;
+    background: #000;
+    font-family: Century Gothic;
+    margin: 0;
+    padding: 0;
+}
+::-webkit-scrollbar-track {
+    background-color: #F4F4F4;
+}
+::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+}
+::-webkit-scrollbar-thumb {
+    background: #000;
+}
+#max {
+    background-color: #000;
+}
+#manual {
+    background-color: #1E90FF;
+}
+.scroll{
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+.scroll input {
+    display: none;
+}
+.sections {
+    transition: all .5s;
+}
+#rd_manual:checked ~ .sections {
+    margin-top: -100vh;
+}
+#rd_max:checked ~ .sections {
+    margin-top: 0vh;
+}
+.block {
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+.division {
+    position:relative;
+    width: 33%;
+    height: 100%;
+    float: left;
+    margin-top: 5px;
+}
+.box {
+    border: 1px solid;
+    border-color: white;
+    font-size: 14px;
+}
+a:link, a:visited, a:hover, a:active {
+    color: white;
+}
+
+textarea{
+    width: 30vw;
+    height: 90vh;
+    background-color: transparent;
+    font-family: Century Gothic;
+    border: 1px solid #000000;
+    margin-top: 2px;
+    padding: 5px;
+    color: #ffffff;
+    outline-width: 2px;
+    outline-style: double;   
+    resize: none;
+}
+img{
+    margin-top: 10px;
+}
+button {
+    outline: none;
+}
+#btn_interact {
+    background: none;
+    color: #1E90FF;
+    font-family: Century Gothic;
+    font-size: 20px;
+    border: 1px solid #1E90FF;
+    border-radius: 70px;
+    margin-top: 0px;
+    box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.5);
+    cursor: pointer;
+    min-height: 65px;
+    min-width: 65px;
+    padding: 15px 70px;
+    transition: background, padding 500ms ease-in-out;
+}
+#btn_manual{
+    background-color: #1E90FF;
+    color: #000000;
+    font-family: Century Gothic;
+    font-size: 15px;
+    border: 1px solid #000000;
+    border-radius: 70px;
+    padding: 10px 20px;
+    cursor: help;
+}
+#btn_max {
+    background: #000;
+    color: #1E90FF;
+    font-family: Century Gothic;
+    font-size: 20px;
+    border: 1px solid #1E90FF;
+    border-radius: 70px;
+    margin-top: 20px;
+    padding: 15px 70px;
+    box-shadow: 0 0 0 0 rgba(30, 144, 255, 0.5);
+    cursor: pointer;
+}
+#btn_interact.is-loading {
+    animation: pulse 1.5s infinite;
+    padding: 15px 17px;
+}
+#btn_interact.is-loading span {
+    display: none;
+}
+#btn_manual.is-loading {
+    margin-top: 40px;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(0.9);
+    }
+    70% {
+        transform: scale(1);
+        box-shadow: 0 0 0 50px rgba(30, 144, 255, 0);
+    }
+    100% {
+        transform: scale(0.9);
+        box-shadow: 0 0 0 0 rgba(30, 144, 255, 0);
+    }
+}
+#manual_text {
+    color: #000;
+    text-align: left;
+    border-top: 1px solid;
+    margin: 10px;
+    padding: 5px;
+    width: 98vw;
+    height: 85vh;
+    overflow: auto;
+}
+.titles {
+    font-size: 20px;
+    font-weight: bold;
+}
+.m_s {
+    color: #bbcadc;
+}
+i {
+    color: #471dab;
+}
+
+

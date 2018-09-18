@@ -1,0 +1,245 @@
+/* CSS para input checkbox e radio */
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    padding-top: 2px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.checkmark {
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+    margin-top: 0.5%;
+}
+
+.checkmarkSimples {
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.checkmarkLembrete {
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.checkmarkTarefa {
+    position: absolute;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+    border-radius: 50%;
+}
+
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmark {
+    background-color: #330e0e;
+}
+
+.container:hover input ~ .checkmarkSimples {
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmarkSimples {
+    background-color: #012a7c;
+}
+
+.container:hover input ~ .checkmarkLembrete{
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmarkLembrete {
+    background-color: #00471a;
+}
+
+.container:hover input ~ .checkmarkTarefa {
+    background-color: #ccc;
+}
+
+.container input:checked ~ .checkmarkTarefa {
+    background-color: #b23601;
+}
+
+.submenuItems{
+  padding: 0;
+}
+
+
+/* CSS para visualização da lista de itens */
+
+.panel-body ul {
+  display: block;
+  width: 100%;
+  list-style: none;
+}
+
+.panel-body li {
+  font-size: 18px;
+  font-family: cursive;
+  display: block;
+  border-bottom: 1px solid #f1f1f1;
+  padding: 5px;
+  float: none;
+}
+
+.panel-body #SIM {
+  border-right: 4px solid #012a7c;
+}
+
+.panel-body #LEM {
+  border-right: 4px solid #00471a;
+}
+
+.panel-body #TAR {
+  border-right: 4px solid #b23601;
+}
+
+.panel-body .liDescricao{
+  border-bottom: none;
+  background-color: white;
+  padding: 0.5%;
+  margin-left: 6%;
+  font-size: 15px;
+}
+
+/* CSS para Select (modo de visualização de lista de itens) */
+
+#modoLista{
+  -webkit-appearance: none;
+   -moz-appearance: none;
+   appearance: none;
+   background: white;
+   width: 120px;
+   height:30px;
+   color: #444;
+   border:1px solid white;
+   border-radius: 15%;
+   padding: 5px;
+   outline: none;
+   display: inline-block;
+}
+
+.button {
+    margin-left: 80%;
+    float: left;
+    border:1px solid white;
+    background: white;
+    height:30px;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 12px;
+    outline: none;
+}
+
+.imgSeta{
+  max-width:40px;
+  max-height:20px;
+}
+
+.dropdownlink{
+  margin-left: 4%;
+}
+
+#scroll {
+  height:200px;
+  overflow:auto;
+}
+
+.checkTags{
+  float: left;
+}
+
+#formLembrete{
+  border-right: 6px solid #00471a;
+}
+
+#formSimples{
+  border-right: 6px solid #012a7c;
+}
+
+#formTarefa{
+  border-right: 6px solid #b23601;
+}
+
+.perfil{
+  border-radius: 100%;
+  border: 1px solid black;
+  max-width:120px;
+  max-height:100px;
+  width: auto;
+  height: auto;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.perfil:hover{
+  border: 2px solid black;
+}
+
+#excluiConta{
+  color: red;
+  font-size: 12px;
+}
+
+/* CSS para botão de opições de item */
+
+.opcoesItem{
+  float: right;
+  background: white;
+  margin-top: -0.4%;
+  border: none;
+}
+
+.opcoesItem:hover{
+  background: #f7f7f7;
+}
+
+.opItemModal{
+  text-decoration: none;
+  color: black;
+}
+
+/* CSS para botão nas tags */
+
+.buttonStyle{
+    float: right;
+    background: #17191e;
+    padding: 1%;
+    border: none;
+    display: none;
+}
+
+.container:hover .buttonStyle{
+    background-color: #121418;
+}
+
+
