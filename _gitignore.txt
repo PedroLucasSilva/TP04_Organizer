@@ -1,0 +1,2 @@
+/organizer-view/nbproject/private/
+/organizer-view/build/
