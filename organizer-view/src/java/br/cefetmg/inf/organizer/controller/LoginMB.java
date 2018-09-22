@@ -18,35 +18,26 @@ import javax.faces.context.FacesContext;
 public class LoginMB implements Serializable {
     
     private User currentUser;
-    private String codEmail;
-    private String userPassword;
     
     private IKeepUser keepUser;
     
     public LoginMB() throws SocketException, UnknownHostException {
         this.keepUser = new KeepUserProxy();
         currentUser = new User();
-        codEmail = "";
-        userPassword = "";
     }
 
-    public String getCodEmail() {
-        return codEmail;
+    public User getCurrentUser() {
+        return currentUser;
     }
 
-    public void setCodEmail(String codEmail) {
-        this.codEmail = codEmail;
+    public void setCurrentUser(User currentUser) {
+        this.currentUser = currentUser;
     }
 
-    public String getUserPassword() {
-        return userPassword;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
-    }
-
+   
     public void getUserLogin() throws PersistenceException, BusinessException{
-        currentUser = keepUser.getUserLogin(codEmail, userPassword);
+        currentUser = keepUser.getUserLogin(currentUser.getCodEmail(), currentUser.getUserPassword());
     }
+    
+    
 }

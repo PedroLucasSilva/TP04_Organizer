@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
@@ -19,45 +14,45 @@ and open the template in the editor.
         <link rel="StyleSheet" type="text/css" href="css/styles.css"/>
     </h:head>
      <h:body>
-        <div class="login-container">
+        <h:panelGroup layout="block" class="login-container">
 
-            <div class="login-box animated fadeInDown">
-                <div class="login-logo"></div>
-                <div class="login-body">
-                    <div class="login-title"><strong>Junte-se ao Organizer!</strong></div>
+            <h:panelGroup layout="block" class="login-box animated fadeInDown">
+                <h:panelGroup layout="block" class="login-logo"></h:panelGroup>
+                <h:panelGroup layout="block" class="login-body">
+                    <h:panelGroup layout="block" class="login-title"><strong>Junte-se ao Organizer!</strong></h:panelGroup>
                 <h:form class="form-horizontal" id="formRegister">
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <p:inputText class="form-control" placeholder="Email" id="email" value=#{userMB.codEmail}/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <p:inputText class="form-control" placeholder="Nome" id="email" value=#{userMB.userName}/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
-                            <p:inputText class="form-control" placeholder="Senha" id="email" value=#{userMB.userPassword}/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-12">
+                    <h:panelGroup layout="block" class="form-group">
+                        <h:panelGroup layout="block" class="col-md-12">
+                            <p:inputText class="form-control" placeholder="Email" id="email" value=#{userMB.user.codEmail}/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="form-group">
+                        <h:panelGroup layout="block" class="col-md-12">
+                            <p:inputText class="form-control" placeholder="Nome" id="email" value=#{userMB.user.userName}/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="form-group">
+                        <h:panelGroup layout="block" class="col-md-12">
+                            <p:inputText class="form-control" placeholder="Senha" id="email" value=#{userMB.user.userPassword}/>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="form-group">
+                        <h:panelGroup layout="block" class="col-md-12">
                             <p:inputText class="form-control" placeholder="Confirmar senha" id="email" value=#{userMB.confirmPassword}/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-md-6">
+                        </h:panelGroup>
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="form-group">
+                        <h:panelGroup layout="block" class="col-md-6">
                             <h:commandButton  type="button" class="btn btn-info btn-block" action="#{userMB.createUser}" value="Cadastrar"></h:commandButton>
-                        </div>
-                    </div>
+                        </h:panelGroup>
+                    </h:panelGroup>
                 </h:form>
-                    <div class="login-subtitle">
+                    <h:panelGroup layout="block" class="login-subtitle">
                         Já possui uma conta? <h:link outcome="login.jsf" value="Logar">Logar</h:link>
-                    </div>
-                </div>
-            </div>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
 
-        </div>
+        </h:panelGroup>
     </h:body>
 </html>
