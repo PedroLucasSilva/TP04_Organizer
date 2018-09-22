@@ -2,10 +2,6 @@ package br.cefetmg.inf.organizer.model.domain;
 
 import java.io.File;
 
-/**
- *
- * @author aline
- */
 public class User {
     
     private String codEmail;
