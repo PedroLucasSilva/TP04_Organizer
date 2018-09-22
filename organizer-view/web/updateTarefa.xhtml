@@ -27,19 +27,21 @@
                                 <h:panelGroup layout="block" class="panel panel-default">
                                     <h:panelGroup layout="block" class="panel-body">
                                         <h1 style="text-align:center">Tarefa</h1>
+                                        <h:inputHidden value="#{itemMB.item.seqItem}" />
+                                        <h:inputHidden value="#{itemMB.item.identifierItem}" />
                                         <h:panelGroup layout="block" class="form-group">
                                             <label class="col-md-3 col-xs-12 control-label">Nome: </label>
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                    <h:inputText class="form-control" required="true" id="nameItem"/>                                
+                                                    <h:inputText class="form-control" required="true" id="nameItem" value="#{itemMB.item.nameItem}"/>                                
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                         </h:panelGroup>
                                         <h:panelGroup layout="block" class="form-group">
                                             <label class="col-md-3 col-xs-12 control-label">Descrição: </label>
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
-                                                <h:inputTextarea class="form-control" cols="20" rows="5" id="descriptionItem" />                          
+                                                <h:inputTextarea class="form-control" cols="20" rows="5" id="descriptionItem" value="#{itemMB.item.descriptionItem}" />                          
                                             </h:panelGroup>
                                         </h:panelGroup>
                                         <h:panelGroup layout="block" class="form-group">
@@ -47,7 +49,7 @@
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                                    <h:inputText class="form-control" id="dateOfItem" label="Receipt Date" >
+                                                    <h:inputText class="form-control" id="dateOfItem" label="Receipt Date" value="#{itemMB.item.dateItem}">
                                                         <f:convertDateTime pattern="yyyy-M-d" />
                                                     </h:inputText>
                                                 </h:panelGroup>                                               
@@ -59,11 +61,11 @@
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-tag"></span></span>
-                                                    <h:inputText class="form-control" readonly="true" id="tags"/>                                
+                                                    <h:inputText class="form-control" readonly="true" id="tags" value="#{itemMB.listTag}" />                                
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                         </h:panelGroup>
-                                        <h:commandButton class="btn btn-primary pull-right" value="Salvar" action="updateTarefa" />
+                                        <h:commandButton class="btn btn-primary pull-right" value="Salvar" action="#{itemMB.updateItem()}" />
                                     </h:panelGroup>
                                 </h:panelGroup>
                             </h:form>

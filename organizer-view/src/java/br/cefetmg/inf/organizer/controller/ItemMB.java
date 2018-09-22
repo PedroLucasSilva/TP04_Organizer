@@ -9,6 +9,7 @@ import br.cefetmg.inf.organizer.model.service.IKeepTag;
 import br.cefetmg.inf.organizer.proxy.KeepItemProxy;
 import br.cefetmg.inf.organizer.proxy.KeepItemTagProxy;
 import br.cefetmg.inf.organizer.proxy.KeepTagProxy;
+import br.cefetmg.inf.util.exception.BusinessException;
 import br.cefetmg.inf.util.exception.PersistenceException;
 import java.io.Serializable;
 import java.net.SocketException;
@@ -45,15 +46,15 @@ public class ItemMB implements Serializable{
         idItemString = "";
         tagItem = new ArrayList();
     }
-    
-    public void setItem(Item item) {
-        this.item = item;
-    }
 
     public Item getItem() {
         return item;
     }
 
+    public void setItem(Item item) {
+        this.item = item;
+    }
+    
     public void setSelectType(String selectType) {
         this.selectType = selectType;
     }
@@ -69,8 +70,16 @@ public class ItemMB implements Serializable{
     public String getIdItemString() {
         return idItemString;
     }
+
+    public String getListTag() {
+        return listTag;
+    }
+
+    public void setListTag(String listTag) {
+        this.listTag = listTag;
+    }
     
-    public boolean createItem() throws PersistenceException {
+    public boolean createItem() throws PersistenceException, BusinessException {
         
         boolean success;
         
@@ -83,6 +92,8 @@ public class ItemMB implements Serializable{
         } else {
             item.setIdentifierStatus(null);
         }
+        
+        item.setUser(user.getCurrentUser());
         
         success = keepItem.createItem(item);
         
@@ -98,7 +109,7 @@ public class ItemMB implements Serializable{
 
     }
     
-    public boolean updateItem() throws PersistenceException{
+    public boolean updateItem() throws PersistenceException, BusinessException{
         
         boolean success = false;
         Long idItem = Long.parseLong(idItemString); 
@@ -124,7 +135,7 @@ public class ItemMB implements Serializable{
         boolean success;        
         Long idItem = Long.parseLong(idItemString); 
        
-        success = keepItem.deleteItem(idItem, user);
+        success = keepItem.deleteItem(idItem, user.getCurrentUser());
         
         if(success)
             success = keepItemTag.deleteTagByItemId(idItem);
@@ -133,7 +144,7 @@ public class ItemMB implements Serializable{
 
     }
     
-    public void insertTagInItem(){
+    public void insertTagInItem() throws PersistenceException, BusinessException{
         
         String[] vetTag = listTag.split(";");
 
@@ -141,14 +152,14 @@ public class ItemMB implements Serializable{
             if(vetTag1.equals(" ")){
                     break;
             } else {
-                if (keepTag.searchTagByName(vetTag1.trim(), user) == null) {
+                if (keepTag.searchTagByName(vetTag1.trim(), user.getCurrentUser()) == null) {
                     System.out.println("Tag sem correspondencia");
                 } else {
                     Tag tagOfUser = new Tag();
 
-                    tagOfUser.setSeqTag(keepTag.searchTagByName(vetTag1.trim(), user));
+                    tagOfUser.setSeqTag(keepTag.searchTagByName(vetTag1.trim(), user.getCurrentUser()));
                     tagOfUser.setTagName(vetTag1.trim());
-                    tagOfUser.setUser(user);
+                    tagOfUser.setUser(user.getCurrentUser());
 
                     tagItem.add(tagOfUser);
                 }

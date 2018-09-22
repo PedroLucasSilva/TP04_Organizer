@@ -43,14 +43,14 @@
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
-                                                    <h:inputText class="form-control" required="true" id="nameItem" value="#{itemMB.item}"/>                                
+                                                    <h:inputText class="form-control" required="true" id="nameItem" value="#{itemMB.item.nameItem}"/>                                
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                         </h:panelGroup>
                                         <h:panelGroup layout="block" class="form-group">
                                             <label class="col-md-3 col-xs-12 control-label">Descrição: </label>
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
-                                                <h:inputTextarea class="form-control" cols="20" rows="5" id="descriptionItem" value="#{itemMB.item}" />                          
+                                                <h:inputTextarea class="form-control" cols="20" rows="5" id="descriptionItem" value="#{itemMB.item.descriptionItem}" />                          
                                             </h:panelGroup>
                                         </h:panelGroup>
                                         <h:panelGroup layout="block" class="form-group">
@@ -58,7 +58,7 @@
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                                                    <h:inputText class="form-control" id="dateOfItem" label="Receipt Date" readonly ="true">
+                                                    <h:inputText class="form-control" id="dateOfItem" label="Receipt Date" value="#{itemMB.item.dateItem}" readonly ="true">
                                                         <f:convertDateTime pattern="yyyy-M-d" />
                                                     </h:inputText>
                                                 </h:panelGroup>
@@ -70,11 +70,11 @@
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-tag"></span></span>
-                                                    <h:inputText onclick="PF('selectTags').show();" class="form-control" readonly="true" id="tags"/>                                
+                                                    <h:inputText onclick="PF('selectTags').show();" class="form-control" readonly="true" id="tags" value="#{itemMB.listTag}"/>                                
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                         </h:panelGroup>
-                                        <h:commandButton class="btn btn-primary pull-right" value="Criar" action="criarItem" />
+                                        <h:commandButton class="btn btn-primary pull-right" value="Criar" action="#{itemMB.createItem()}" />
                                     </h:panelGroup>
                                 </h:panelGroup>
                             </h:form>
