@@ -1,14 +1,97 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+          
+      xmlns:f="http://xmlns.jcp.org/jsf/core">      
     <h:head>
-        <title>Facelet Title</title>
+        <title>Organizer</title>
+        <meta charset="utf-8"/>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" type="text/css" href="css/theme-default.css" id="themeStyle"/>
+        <link rel="stylesheet" href="css/styles.css?v=1"/>
     </h:head>
     <h:body>
-        Hello from Facelets
-        <br />
-        <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
+        
+        <h:panelGroup class="page-container" layout="block">
+            <!-- Menu lateral -->
+            
+            <h:panelGroup layout="block" class="page-content">
+                <!-- Menu Horizontal -->
+                
+                <form id="createItemPageForm" action="/organizer/servletcontroller?process=LoadTagsToCreateItem" method="post"></form>
+                
+                <h:panelGroup class="page-title"></h:panelGroup>
+                
+                <h:panelGroup layout="block" class="page-content-wrap">
+                    <h:panelGroup layout="block" class="row">
+                        <h:panelGroup layout="block" class="col-md-12">
+                            <h:panelGroup layout="block" class="panel panel-default">
+                                <h:panelGroup layout="block" class="panel-body accordion-menu">
+                                    <ul id = "ulItens">
+                                        <li>
+                                            <a id="indexCreateItem">Criar Item</a>
+                                        </li>
+                                        
+                                        <ui:repeat var = "item" value = "#{itemMB.itemList}">
+                                            <ui:fragment rendered="#{item.identifierItem eq 'TAR'}">
+                                                <li id = "#{item.identifierItem}">
+                                                    
+                                                    <label class="container" style="float:left">
+                                                        <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
+                                                        <h:panelGroup class="checkmark"></h:panelGroup>
+                                                    </label>
+                                                    <button id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal">
+                                                        <i class="fa fa-ellipsis-v"></i>
+                                                    </button>
+                                                    
+                                                    <p:accordionPanel activeIndex="null">
+                                                        <p:tab title="#{item.nameItem}">
+                                                            <ul class="submenuItems">
+                                                                <li id="subItem" class="liDescricao">
+                                                                    #{item.descriptionItem}
+                                                                </li>
+                                                                <li class="liDescricao" style="text-align: right">
+                                                                    #{item.dateItem}
+                                                                </li>
+                                                            </ul>
+                                                        </p:tab>
+                                                    </p:accordionPanel>
+                                                </li>
+                                            </ui:fragment>
+                                            
+                                            <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
+                                                <li id = "#{item.identifierItem}">
+                                                    <button id="#{item.seqItem}" value="#{item.nameItem}" class="opcoesItem btOption" data-toggle="modal" data-target="#btaoOpcaoModal">
+                                                        <i class="fa fa-ellipsis-v"></i>
+                                                    </button>
+
+                                                    <p:accordionPanel activeIndex="null">
+                                                        <p:tab title="#{item.nameItem}" >
+                                                            <ul class="submenuItems">
+                                                                <li id="subItem" class="liDescricao">
+                                                                    #{item.descriptionItem}
+                                                                </li>
+                                                                <li class="liDescricao" style="text-align: right">
+                                                                    #{item.dateItem}
+                                                                </li>
+                                                            </ul>
+                                                        </p:tab>
+                                                    </p:accordionPanel>
+                                                </li>
+                                            </ui:fragment>
+                                        </ui:repeat>
+                                    </ul>
+                                </h:panelGroup>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
     </h:body>
 </html>
-
