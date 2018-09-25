@@ -70,6 +70,14 @@ public class ItemMB implements Serializable{
     public String getIdItemString() {
         return idItemString;
     }
+
+    public String getListTag() {
+        return listTag;
+    }
+
+    public void setListTag(String listTag) {
+        this.listTag = listTag;
+    }
     
     public boolean createItem() throws PersistenceException, BusinessException {
         
@@ -84,6 +92,8 @@ public class ItemMB implements Serializable{
         } else {
             item.setIdentifierStatus(null);
         }
+        
+        item.setUser(user.getCurrentUser());
         
         success = keepItem.createItem(item);
         
@@ -134,7 +144,9 @@ public class ItemMB implements Serializable{
 
     }
     
-    public void insertTagInItem() throws  PersistenceException, BusinessException{
+
+    public void insertTagInItem() throws PersistenceException, BusinessException{
+
         
         String[] vetTag = listTag.split(";");
 
