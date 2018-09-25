@@ -13,7 +13,7 @@
         <link rel="StyleSheet" type="text/css" href="css/theme-default.css" id="themeStyle"/>
         <link rel="StyleSheet" type="text/css" href="css/styles.css"/>
     </h:head>
-     <h:body>
+    <h:body>
         <h:panelGroup layout="block" class="login-container">
 
             <h:panelGroup layout="block" class="login-box animated fadeInDown">
@@ -23,32 +23,32 @@
                 <h:form class="form-horizontal" id="formRegister">
                     <h:panelGroup layout="block" class="form-group">
                         <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText class="form-control" placeholder="Email" id="email" value=#{userMB.user.codEmail}/>
+                            <p:inputText required="true" requiredMessage="Informe seu email!" class="form-control" placeholder="Email" id="email" value="#{userMB.user.codEmail}"/>
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="form-group">
                         <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText class="form-control" placeholder="Nome" id="email" value=#{userMB.user.userName}/>
+                            <p:inputText required="true" requiredMessage="Informe seu nome!" class="form-control" placeholder="Nome" id="name" value="#{userMB.user.userName}"/>
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="form-group">
                         <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText class="form-control" placeholder="Senha" id="email" value=#{userMB.user.userPassword}/>
+                            <p:inputText type="password" required="true" requiredMessage="Informe sua senha!" class="form-control" placeholder="Senha" id="password" value="#{userMB.user.userPassword}"/>
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="form-group">
                         <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText class="form-control" placeholder="Confirmar senha" id="email" value=#{userMB.confirmPassword}/>
+                            <p:inputText type="password" required="true" requiredMessage="Informe sua senha para confirmar!" class="form-control" placeholder="Confirmar senha" id="confirmPassword" value="#{userMB.confirmPassword}"/>
                         </h:panelGroup>
                     </h:panelGroup>
                     <h:panelGroup layout="block" class="form-group">
                         <h:panelGroup layout="block" class="col-md-6">
-                            <h:commandButton  type="button" class="btn btn-info btn-block" action="#{userMB.createUser}" value="Cadastrar"></h:commandButton>
+                            <h:commandButton class="btn btn-info btn-block" action="#{userMB.createUser()}" value="Cadastrar"></h:commandButton>
                         </h:panelGroup>
                     </h:panelGroup>
                 </h:form>
                     <h:panelGroup layout="block" class="login-subtitle">
-                        Já possui uma conta? <h:link outcome="login.jsf" value="Logar">Logar</h:link>
+                        Já possui uma conta? <h:link outcome="login.jsf" value="Logar"></h:link>
                     </h:panelGroup>
                 </h:panelGroup>
             </h:panelGroup>

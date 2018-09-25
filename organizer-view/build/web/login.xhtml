@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Organizer</title>
+        <meta charset="utf-8"></meta>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"></meta>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
+        <meta name="viewport" content="width=device-width, initial-scale=1"></meta>      
+        <link rel="StyleSheet" type="text/css" href="css/theme-default.css" id="themeStyle"/>
+        <link rel="StyleSheet" type="text/css" href="css/styles.css"/>
+    </h:head>
+    <h:body>
+        <c:if test="#{loginMB.currentUser != null}">
+            #{facesContext.externalContext.dispatch("index.jsf")}
+        </c:if>
+        <h:panelGroup layout="block" class="login-container">
+
+            <h:panelGroup layout="block" class="login-box animated fadeInDown">
+                <h:panelGroup layout="block" class="login-logo"></h:panelGroup>
+                <h:panelGroup layout="block" class="login-body">
+                    <h:panelGroup layout="block" class="login-title"><strong>Bem Vindo(a) ao Organizer!</strong></h:panelGroup>
+                    <h:form id="formLogin" class="form-horizontal" >
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-12">
+                                <p:inputText type="text" class="form-control" placeholder="Email" required="true" requiredMessage="Informe seu email!" value="#{loginMB.currentUser.codEmail}"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-12">
+                                <p:inputText type="password" class="form-control" placeholder="Senha" required="true" requiredMessage="Informe sua senha!" value="#{loginMB.currentUser.userPassword}"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-6">
+                                <h:commandButton type="submit" class="btn btn-info btn-block" action="#{loginMB.getUserLogin()}" value="Logar"></h:commandButton>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                    </h:form>
+                    <h:panelGroup layout="block" class="login-subtitle">
+                        Não possui uma conta ainda? <h:link outcome="registerUser.jsf" value="Crie uma conta"></h:link>
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:panelGroup>
+        </h:panelGroup>
+    </h:body>
+</html>
+

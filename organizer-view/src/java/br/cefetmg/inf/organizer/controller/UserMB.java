@@ -3,6 +3,7 @@ package br.cefetmg.inf.organizer.controller;
 import br.cefetmg.inf.organizer.model.domain.User;
 import br.cefetmg.inf.organizer.model.service.IKeepUser;
 import br.cefetmg.inf.organizer.proxy.KeepUserProxy;
+import br.cefetmg.inf.util.PasswordCriptography;
 import br.cefetmg.inf.util.exception.BusinessException;
 import br.cefetmg.inf.util.exception.PersistenceException;
 import java.io.Serializable;
@@ -43,25 +44,47 @@ public class UserMB implements Serializable{
     }
     
     
-    public boolean createUser() throws PersistenceException, BusinessException {
+    public String createUser() throws PersistenceException, BusinessException {
+        boolean confirm = false;
         
         if (user.getUserPassword().equals(confirmPassword)) {
-           
-           boolean confirm = keepUser.registerUser(user);
+           user.setUserPassword(PasswordCriptography.generateMd5(confirmPassword));
+           user.setCurrentTheme(1);
+           confirm = keepUser.registerUser(user);
+        }else{
+            //Dialog de erro
         }
         
-        return false;
-
+        if(confirm){
+            return "true";
+        }else{
+            //Dialog erro
+            System.out.println("erro");
+            return "false";
+        }
     }
 
     public boolean updateUser() throws PersistenceException, BusinessException {
        boolean confirm = keepUser.updateUser(user);
-       return false;
+       
+       if(confirm){
+            return true;
+        }else{
+            //Dialog erro
+            System.out.println("erro");
+            return false;
+        }
     }
 
     public boolean deleteUser() throws PersistenceException, BusinessException {
         boolean confirm = keepUser.deleteAccount(user);
-        return false;
+        if(confirm){
+            return true;
+        }else{
+            //Dialog erro
+            System.out.println("erro");
+            return false;
+        }
     }
 
 }

@@ -3,6 +3,7 @@ package br.cefetmg.inf.organizer.controller;
 import br.cefetmg.inf.organizer.model.domain.User;
 import br.cefetmg.inf.organizer.model.service.IKeepUser;
 import br.cefetmg.inf.organizer.proxy.KeepUserProxy;
+import br.cefetmg.inf.util.PasswordCriptography;
 import br.cefetmg.inf.util.exception.BusinessException;
 import br.cefetmg.inf.util.exception.PersistenceException;
 import javax.inject.Named;
@@ -35,8 +36,23 @@ public class LoginMB implements Serializable {
     }
 
    
-    public void getUserLogin() throws PersistenceException, BusinessException{
-        currentUser = keepUser.getUserLogin(currentUser.getCodEmail(), currentUser.getUserPassword());
+    public String getUserLogin() throws PersistenceException, BusinessException{
+        currentUser = keepUser.getUserLogin(currentUser.getCodEmail(), 
+                PasswordCriptography.generateMd5(currentUser.getUserPassword()));
+        
+        if(currentUser == null){
+            //Dialog de erro
+            System.out.println("Erro no login");
+            return "false";
+        }else{
+            //Redireciona p/ index
+            return "true";
+        }
+    }
+    
+    public void userLogout(){
+        currentUser = null;
+        FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
     }
     
     

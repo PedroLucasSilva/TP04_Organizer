@@ -4867,13 +4867,13 @@ background: #1caf9a !important;
 /* end Dropzone */
 /* errors */
 .error-container {
-  width: 500px;
+  width: 300px;
   margin: 50px auto 0px;
 }
 .error-container .error-code {
   float: left;
   width: 100%;
-  font-size: 60px;
+  font-size: 30px;
   line-height: 130px;
   text-align: center;
   color: #a8130b;
