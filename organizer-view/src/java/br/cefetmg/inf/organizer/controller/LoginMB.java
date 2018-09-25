@@ -20,11 +20,10 @@ public class LoginMB implements Serializable {
     
     private User currentUser;
     
-    private IKeepUser keepUser;
+    private final IKeepUser keepUser;
     
     public LoginMB() throws SocketException, UnknownHostException {
         this.keepUser = new KeepUserProxy();
-        currentUser = new User();
     }
 
     public User getCurrentUser() {
