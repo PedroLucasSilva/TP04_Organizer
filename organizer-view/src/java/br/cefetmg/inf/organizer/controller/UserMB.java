@@ -9,20 +9,16 @@ import br.cefetmg.inf.util.exception.PersistenceException;
 import java.io.Serializable;
 import java.net.SocketException;
 import java.net.UnknownHostException;
-import java.util.HashMap;
-import java.util.Map;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import org.primefaces.PrimeFaces;
 
 @Named(value = "userMB")
 @RequestScoped
 public class UserMB implements Serializable {
 
-    @ManagedProperty(value = "#errorMB")
-    private ErrorMB error;
     private User user;
     private String confirmPassword;
 
@@ -32,7 +28,6 @@ public class UserMB implements Serializable {
         this.user = new User();
         this.confirmPassword = "";
         this.keepUser = new KeepUserProxy();
-        error = new ErrorMB();
     }
 
     public User getUser() {
@@ -59,17 +54,11 @@ public class UserMB implements Serializable {
             user.setCurrentTheme(1);
             confirm = keepUser.registerUser(user);
         } else {
-            error.setErrorCode("Error 406");
-            error.setErrorText("Suas senhas não conferem!");
-            error.setErrorSubText("Verifique as senhas anteriormente digitadas.");
-            Map<String, Object> options = new HashMap<String, Object>();
-            options.put("modal", true);
-            options.put("width", 800);
-            options.put("height", 600);
-            options.put("contentWidth", "100%");
-            options.put("contentHeight", "100%");
-            options.put("closable", true);
-            PrimeFaces.current().dialog().openDynamic("errorPage", options, null);
+            FacesContext.getCurrentInstance().addMessage("errorForm:errorCodeInput", new FacesMessage("Error 406!"));
+            FacesContext.getCurrentInstance().addMessage("errorForm:errorTextInput", new FacesMessage("Suas senhas não conferem!"));
+            FacesContext.getCurrentInstance().addMessage("errorForm:errorSubTextInput", new FacesMessage("Verifique as senhas anteriormente digitadas."));
+            PrimeFaces current = PrimeFaces.current();
+            current.executeScript("PF('errorDialog').show();");
             user = new User();
             confirmPassword = "";
         }

@@ -24,6 +24,7 @@ public class LoginMB implements Serializable {
     
     public LoginMB() throws SocketException, UnknownHostException {
         this.keepUser = new KeepUserProxy();
+        currentUser = new User();
     }
 
     public User getCurrentUser() {
@@ -40,6 +41,7 @@ public class LoginMB implements Serializable {
                 PasswordCriptography.generateMd5(currentUser.getUserPassword()));
         
         if(currentUser == null){
+            currentUser = new User();
             //Dialog de erro
             System.out.println("Erro no login");
             return "false";

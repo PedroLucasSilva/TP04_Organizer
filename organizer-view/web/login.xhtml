@@ -15,7 +15,7 @@
         <link rel="StyleSheet" type="text/css" href="css/styles.css"/>
     </h:head>
     <h:body>
-        <c:if test="#{loginMB.currentUser != null}">
+        <c:if test="#{loginMB.currentUser.codEmail.length() > 0}">
             #{facesContext.externalContext.dispatch("index.jsf")}
         </c:if>
         <h:panelGroup layout="block" class="login-container">
@@ -27,12 +27,14 @@
                     <h:form id="formLogin" class="form-horizontal" >
                         <h:panelGroup layout="block" class="form-group">
                             <h:panelGroup layout="block" class="col-md-12">
-                                <p:inputText type="text" class="form-control" placeholder="Email" required="true" requiredMessage="Informe seu email!" value="#{loginMB.currentUser.codEmail}"/>
+                                <p:inputText id="email" type="text" class="form-control" placeholder="Email" required="true" requiredMessage="Informe seu email!" value="#{loginMB.currentUser.codEmail}"/>
+                                 <p:message for="email"/>
                             </h:panelGroup>
                         </h:panelGroup>
                         <h:panelGroup layout="block" class="form-group">
                             <h:panelGroup layout="block" class="col-md-12">
-                                <p:inputText type="password" class="form-control" placeholder="Senha" required="true" requiredMessage="Informe sua senha!" value="#{loginMB.currentUser.userPassword}"/>
+                                <p:inputText id="password" type="password" class="form-control" placeholder="Senha" required="true" requiredMessage="Informe sua senha!" value="#{loginMB.currentUser.userPassword}"/>
+                                <p:message for="password"/>
                             </h:panelGroup>
                         </h:panelGroup>
                         <h:panelGroup layout="block" class="form-group">

@@ -20,38 +20,61 @@
                 <h:panelGroup layout="block" class="login-logo"></h:panelGroup>
                 <h:panelGroup layout="block" class="login-body">
                     <h:panelGroup layout="block" class="login-title"><strong>Junte-se ao Organizer!</strong></h:panelGroup>
-                <h:form class="form-horizontal" id="formRegister">
-                    <h:panelGroup layout="block" class="form-group">
-                        <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText required="true" requiredMessage="Informe seu email!" class="form-control" placeholder="Email" id="email" value="#{userMB.user.codEmail}"/>
+                    <h:form class="form-horizontal" id="formRegister">
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-12">
+                                <p:inputText required="true" requiredMessage="Informe seu email!" class="form-control" placeholder="Email" id="email" value="#{userMB.user.codEmail}"/>
+                                <p:message styleClass="customError" for="email"/>
+                            </h:panelGroup>
                         </h:panelGroup>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" class="form-group">
-                        <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText required="true" requiredMessage="Informe seu nome!" class="form-control" placeholder="Nome" id="name" value="#{userMB.user.userName}"/>
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-12">
+                                <p:inputText required="true" requiredMessage="Informe seu nome!" class="form-control" placeholder="Nome" id="name" value="#{userMB.user.userName}"/>
+                                <p:message styleClass="customError" for="name"/>
+                            </h:panelGroup>
                         </h:panelGroup>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" class="form-group">
-                        <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText type="password" required="true" requiredMessage="Informe sua senha!" class="form-control" placeholder="Senha" id="password" value="#{userMB.user.userPassword}"/>
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-12">
+                                <p:inputText type="password" required="true" requiredMessage="Informe sua senha!" class="form-control" placeholder="Senha" id="password" value="#{userMB.user.userPassword}"/>
+                                <p:message styleClass="customError" for="password"/>
+                            </h:panelGroup>
                         </h:panelGroup>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" class="form-group">
-                        <h:panelGroup layout="block" class="col-md-12">
-                            <p:inputText type="password" required="true" requiredMessage="Informe sua senha para confirmar!" class="form-control" placeholder="Confirmar senha" id="confirmPassword" value="#{userMB.confirmPassword}"/>
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-12">
+                                <p:inputText type="password" required="true" requiredMessage="Informe sua senha para confirmar!" class="form-control" placeholder="Confirmar senha" id="confirmPassword" value="#{userMB.confirmPassword}"/>
+                                <p:message styleClass="customError" for="confirmPassword"/>
+                            </h:panelGroup>
                         </h:panelGroup>
-                    </h:panelGroup>
-                    <h:panelGroup layout="block" class="form-group">
-                        <h:panelGroup layout="block" class="col-md-6">
-                            <h:commandButton type="submit" class="btn btn-info btn-block" action="#{userMB.createUser()}" value="Cadastrar"></h:commandButton>
+                        <h:panelGroup layout="block" class="form-group">
+                            <h:panelGroup layout="block" class="col-md-6">
+                                <h:commandButton type="submit" class="btn btn-info btn-block" action="#{userMB.createUser()}" value="Cadastrar"></h:commandButton>
+                            </h:panelGroup>
                         </h:panelGroup>
-                    </h:panelGroup>
-                </h:form>
+                    </h:form>
                     <h:panelGroup layout="block" class="login-subtitle">
                         Já possui uma conta? <h:link outcome="login.jsf" value="Logar"></h:link>
                     </h:panelGroup>
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>
+
+        <p:dialog id="errorDialog" widgetVar="errorDialog"  header="Erro" appendTo="@(body)" resizable="false" draggable="false" styleClass="customBar">
+            <h:form id="errorForm">
+                <h:panelGroup layout="block" class="error-container">
+                    <h:panelGroup layout="block" class="error-code"> 
+                        <h:inputHidden id="errorCodeInput"></h:inputHidden>
+                        <h:message  id="errorCode" for="errorCodeInput"></h:message> 
+                    </h:panelGroup> 
+                    <h:panelGroup layout="block" class="error-text"> 
+                        <h:inputHidden id="errorTextInput"></h:inputHidden>
+                        <h:message id="errorText" for="errorTextInput"></h:message> 
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="error-subtext">
+                        <h:inputHidden id="errorSubTextInput"></h:inputHidden>
+                        <h:message id="errorSubText" for="errorSubTextInput"></h:message> 
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>
