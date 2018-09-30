@@ -117,8 +117,8 @@
                     </h:panelGroup>
                 </h:panelGroup>
                 <hr></hr>                
-                <p:commandButton value="Cancelar" oncomplete="PF('selectTags').hide();" class="btn btn-secondary" />
-                <p:commandButton value="Salvar"  onclick="insertTagsOnInput()" oncomplete="PF('selectTags').hide();" class="btn btn-primary pull-right"/>               
+                <h:commandButton value="Cancelar" onclick="PF('selectTags').hide();" class="btn btn-secondary" />
+                <h:commandButton value="Salvar"  onclick="insertTagsOnInput(); PF('selectTags').hide();" class="btn btn-primary pull-right"/>               
             </h:panelGroup>
         </p:dialog>
         

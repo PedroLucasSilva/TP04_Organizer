@@ -131,7 +131,7 @@ public class ItemMB implements Serializable{
 
     }
     
-    public boolean updateItem() throws PersistenceException, BusinessException{
+    public String updateItem() throws PersistenceException, BusinessException{
         
         boolean success = false;
         Long idItem = Long.parseLong(idItemString); 
@@ -148,22 +148,32 @@ public class ItemMB implements Serializable{
         
         success = keepItem.updateItem(item);
        
-        return false;
+        if (success) {
+            return "true";
+        } else {
+            System.out.println("erro");
+            return "false";
+        }
 
     }
     
-    public boolean deleteItem() throws PersistenceException{
+    public String deleteItem() throws PersistenceException{
         
         boolean success;        
         Long idItem = Long.parseLong(idItemString); 
        
         success = keepItem.deleteItem(idItem, user.getCurrentUser());
         
-        if(success)
+        if(success){
             success = keepItemTag.deleteTagByItemId(idItem);
-       
-        return success;
-
+        }
+        
+        if (success) {
+            return "true";
+        } else {
+            System.out.println("erro");
+            return "false";
+        }
     }
     
 
