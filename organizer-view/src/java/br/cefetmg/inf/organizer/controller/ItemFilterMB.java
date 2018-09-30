@@ -12,28 +12,38 @@ import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
+import javax.faces.bean.ViewScoped;
+import java.io.Serializable;
 
 @Named(value = "itemFilterMB")
 @ManagedBean
-@RequestScoped
-public class ItemFilterMB {
+@ViewScoped
+public class ItemFilterMB implements Serializable {
     ArrayList<Item> itemList;
     ArrayList<Tag> tagList;
     ArrayList<String> typeList;
     IKeepItem keepItem;
-    User user;
+    @ManagedProperty(value="#{loginMB}")
+    LoginMB login;
+    String expression;
     
     public ItemFilterMB() throws SocketException, UnknownHostException{
         itemList = new ArrayList<>();
         tagList = new ArrayList<>();
         typeList = new ArrayList<>();
         keepItem = new KeepItemProxy();
-        user = new User();
-        //remover futuramente
-        user.setCodEmail("1");
-        user.setUserName("1");
+        expression = new String();
+    }
+
+    public String getExpression() {
+        return expression;
+    }
+
+    public void setExpression(String expression) {
+        this.expression = expression;
     }
 
     public ArrayList<Item> getItemList() {
@@ -68,25 +78,24 @@ public class ItemFilterMB {
         this.keepItem = keepItem;
     }
 
-    public User getUser() {
-        return user;
+    public LoginMB getLogin() {
+        return login;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLogin(LoginMB login) {
+        this.login = login;
     }
     
     public void itemListFilter(){
-        
         try {
             if(!tagList.isEmpty() && !typeList.isEmpty()){
-                itemList = keepItem.searchItemByTagAndType(tagList, typeList, user);
+                itemList = keepItem.searchItemByTagAndType(tagList, typeList, login.getCurrentUser());
             }else if(!tagList.isEmpty()){
-                itemList = keepItem.searchItemByTag(tagList, user);
+                itemList = keepItem.searchItemByTag(tagList, login.getCurrentUser());
             }else if(!typeList.isEmpty()){
-                itemList = keepItem.searchItemByType(typeList, user);
+                itemList = keepItem.searchItemByType(typeList, login.getCurrentUser());
             }else {
-                itemList = keepItem.listAllItem(user);
+                itemList = keepItem.listAllItem(login.getCurrentUser());
             }
         } catch (PersistenceException ex) {
             //Erro de persistencia
@@ -136,6 +145,45 @@ public class ItemFilterMB {
             req.getSession().setAttribute("error", error);
             return "/error.jsp";
             */
+        }
+    }
+    
+    public String nameFilter(Item item){
+        //System.out.println("entrou");
+        if(expression.isEmpty()){
+            //System.out.println("empty");
+            return "true";
+        }else{
+            //System.out.println(item.getNameItem());
+            //System.out.println(expression);
+            //System.out.println(item.getNameItem().toLowerCase().indexOf(expression));
+            if(item.getNameItem().toLowerCase().indexOf(expression.toLowerCase()) == -1){
+                //System.out.println("false");
+                return "false";
+            }else{
+                //System.out.println("true");
+                return "true";
+            }
+        }
+    }
+    
+    public void changeTypeList(String type){
+        //se o tipo não estiver na lista, adiciona
+        if(!typeList.contains(type)){
+            typeList.add(type);
+        }else{
+            //se o tipo ja estiver na lista, remove
+            typeList.remove(type);
+        }
+    }
+    
+    public void changeTagList(Tag tag){
+        //se o tipo não estiver na lista, adiciona
+        if(!tagList.contains(tag)){
+            tagList.add(tag);
+        }else{
+            //se o tipo ja estiver na lista, remove
+            tagList.remove(tag);
         }
     }
 }
