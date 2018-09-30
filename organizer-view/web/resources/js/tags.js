@@ -1,12 +1,14 @@
-let arrCheckTags = document.querySelectorAll(".checkTags");
+function init(){
+    let arrCheckTags = document.querySelectorAll(".checkTags");
 
-for (let count = 0; count < arrCheckTags.length; count++) {
-    arrCheckTags[count].addEventListener('click', function (e) {
-        if ($('.checkTags').is(':checked')) {
-            addTagInputSelected(arrCheckTags[count].value);
-        }
-        checkList();
-    });
+    for (let count = 0; count < arrCheckTags.length; count++) {
+        arrCheckTags[count].addEventListener('click', function (e) {
+            if ($('.checkTags').is(':checked')) {
+                addTagInputSelected(arrCheckTags[count].value);
+            }
+            checkList();
+        });
+    }
 }
 
 function addTagInputSelected(tagSelected) {
@@ -39,15 +41,15 @@ function checkList() {
 }
 
 function insertTagsOnInput() {
-    document.querySelector('#tags').value = $("#tagSelected").val();
+    document.getElementById('formCreateItem:tags').value = $("#tagSelected").val();
 }
 
 $('#tags').click(function () {
-    let mainInput = document.querySelector('#tags').value;
+    let mainInput = document.getElementById('formCreateItem:tags').value;
     let selectInput = document.querySelector('#tagSelected').value;
 
     if (mainInput != '' && selectInput == '') {
-        document.querySelector('#tagSelected').value = $("#tags").val();
+        document.querySelector('#tagSelected').value = $("#formCreateItem\\:tags").val();
     }
 
     let arrOldTags = mainInput.split(";");
@@ -96,3 +98,4 @@ $("#buttonSaveModal").click(function () {
     formEdit.action = "/organizer/servletcontroller?process=UpdateTag";
     formEdit.submit();
 });
+

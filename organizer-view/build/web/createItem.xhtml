@@ -18,6 +18,7 @@
         *********** Importação de JS ***********         
         -->
         <script type="text/javascript" src="js/configuracoes.js"></script>
+        <script type="text/javascript" src="js/tags.js"></script>
     </h:head>
     <h:body>        
         <h:panelGroup layout="block" class="page-container">
@@ -62,19 +63,20 @@
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-calendar"></span></span>                                                    
-                                                    <h:inputText class="form-control" id="dateOfItem" label="Receipt Date" value="#{itemMB.item.dateItem}" readonly ="true">
-                                                        <f:convertDateTime pattern="yyyy-M-d" />
+                                                    <h:inputText class="form-control" id="dateOfItem" label="Date" value="#{itemMB.date}" disabled="true">
+                                                        <f:convertDateTime pattern="dd-M-yyyy" />
                                                     </h:inputText>
                                                 </h:panelGroup>
                                                 <span class="help-block" id="helpItem">Itens de tipo simples não possuem data.</span>
                                             </h:panelGroup>
+                                            <h:message for = "dateInput" style = "color:red" />
                                         </h:panelGroup> 
                                         <h:panelGroup layout="block" class="form-group">
                                             <label class="col-md-3 col-xs-12 control-label">Tags: </label>
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-tag"></span></span>
-                                                    <h:inputText onclick="PF('selectTags').show();" class="form-control" readonly="true" id="tags" value="#{itemMB.listTag}"/>                                
+                                                    <h:inputText onclick="PF('selectTags').show(); init();" class="form-control" readonly="true" id="tags" value="#{itemMB.listTag}"/>                                
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                         </h:panelGroup>
@@ -98,7 +100,7 @@
                     <label>Selecionados: </label>
                     <h:panelGroup class="input-group" layout="block">
                         <span class="input-group-addon"><span class="fa fa-tag"></span></span>
-                        <h:inputText class="form-control" readonly="true"/>
+                        <h:inputText id="tagSelected" class="form-control" readonly="true"/>
                     </h:panelGroup>
                 </h:panelGroup>
                 <hr></hr>
@@ -107,14 +109,16 @@
                     <h:panelGroup class="panel panel-default" layout="block">
                         <h:panelGroup class="panel-body" id="scroll" layout="block">
                             <ui:repeat var = "tag" value = "#{tagDialog.tag}">
-                                <h:outputText value="#{tag.tagName}" />                        
+                                <li>&nbsp; #${tag.tagName}
+                                    <input type="checkbox" class="checkTags" value="#{tag.tagName}" />      
+                                </li>
                             </ui:repeat>
                         </h:panelGroup>
                     </h:panelGroup>
                 </h:panelGroup>
                 <hr></hr>                
-                <h:commandButton value="Cancelar" class="btn btn-secondary" />
-                <h:commandButton value="Salvar" class="btn btn-primary pull-right"/>               
+                <p:commandButton value="Cancelar" oncomplete="PF('selectTags').hide();" class="btn btn-secondary" />
+                <p:commandButton value="Salvar"  onclick="insertTagsOnInput()" oncomplete="PF('selectTags').hide();" class="btn btn-primary pull-right"/>               
             </h:panelGroup>
         </p:dialog>
         

@@ -16,9 +16,11 @@ import java.io.Serializable;
 import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
+import java.util.Date;
+import javax.el.ELContext;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 
 @Named(value = "itemMB")
 @RequestScoped
@@ -26,7 +28,7 @@ public class ItemMB implements Serializable{
     
     private Item item;
     private ItemTag itemTag;
-    @ManagedProperty(value="#loginMB")
+    private Date date;
     private LoginMB user;
     private IKeepItem keepItem;
     private IKeepTag keepTag;
@@ -39,6 +41,7 @@ public class ItemMB implements Serializable{
     public ItemMB() throws SocketException, UnknownHostException {
         this.item = new Item();
         this.itemTag = new ItemTag();
+        this.date = new Date();
         this.keepItem = new KeepItemProxy();
         this.keepTag = new KeepTagProxy();
         this.keepItemTag = new KeepItemTagProxy();
@@ -46,6 +49,9 @@ public class ItemMB implements Serializable{
         this.selectType = "";
         this.idItemString = "";
         this.tagItem = new ArrayList();
+        FacesContext context = FacesContext.getCurrentInstance();
+        ELContext elContext = context.getELContext();
+        user = (LoginMB) elContext.getELResolver().getValue(elContext, null, "loginMB");
     }
 
     public Item getItem() {
@@ -79,8 +85,16 @@ public class ItemMB implements Serializable{
     public void setListTag(String listTag) {
         this.listTag = listTag;
     }
-    
-    public boolean createItem() throws PersistenceException, BusinessException {
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+        
+    public String createItem() throws PersistenceException, BusinessException {
         
         boolean success;
         
@@ -95,7 +109,7 @@ public class ItemMB implements Serializable{
         }
         
         item.setIdentifierItem(selectType);
-                
+              
         item.setUser(user.getCurrentUser());
         
         success = keepItem.createItem(item);
@@ -108,7 +122,12 @@ public class ItemMB implements Serializable{
             success = keepItemTag.createTagInItem(itemTag);
         }
        
-        return success;
+        if (success) {
+            return "true";
+        } else {
+            System.out.println("erro");
+            return "false";
+        }
 
     }
     
