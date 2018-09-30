@@ -3,39 +3,63 @@ package br.cefetmg.inf.organizer.controller;
 import br.cefetmg.inf.organizer.model.domain.User;
 import br.cefetmg.inf.organizer.model.service.IKeepMaxData;
 import br.cefetmg.inf.organizer.proxy.KeepMaxDataProxy;
+import br.cefetmg.inf.util.exception.PersistenceException;
 import com.google.gson.Gson;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+import javax.faces.bean.ManagedBean;
 
-public class LoadMax implements GenericProcess{
+@ManagedBean
+public class LoadMax{
+    private String items;
+    private String tags;
+    private String tagsItems;
+    private String itemsTags;
 
-    @Override
-    public String execute(HttpServletRequest req, HttpServletResponse res) throws Exception {
-        String pageJSP = "";
+    public LoadMax() throws SocketException, UnknownHostException, PersistenceException{
+        User user = new User();
+        user.setCodEmail("1");
+        user.setUserName("a");
+        user.setUserPassword("1");
+        Gson gson = new Gson();
+        IKeepMaxData keepMaxData = new KeepMaxDataProxy();      
         
-        // Iniciando sessão
-        HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
-        
-        // Carregando dados do modelo e transformando em strings json
-        Gson gson = new Gson();       
-        IKeepMaxData keepMaxData = new KeepMaxDataProxy();
-        
-        String jsonItem = gson.toJson(keepMaxData.loadItems(user)); 
-        String jsonTag = gson.toJson(keepMaxData.loadTags(user));
-        String jsonTagsItems = gson.toJson(keepMaxData.loadTagsItems(user));
-        String jsonItemsTags = gson.toJson(keepMaxData.loadItemsTags(user));
-                
-        // Carregando dados na sessão
-        session.setAttribute("jsonItem", jsonItem);
-        session.setAttribute("jsonTag", jsonTag);
-        session.setAttribute("jsonTagsItems", jsonTagsItems);
-        session.setAttribute("jsonItemsTags", jsonItemsTags);
-        
-        pageJSP = "/max.jsp";
-        
-        return pageJSP;
+        items = gson.toJson(keepMaxData.loadItems(user));
+        tags = gson.toJson(keepMaxData.loadTags(user));
+        tagsItems = gson.toJson(keepMaxData.loadTagsItems(user));
+        itemsTags = gson.toJson(keepMaxData.loadItemsTags(user));
+    }
+
+    public String getItems(){
+        return items;
+    }
+
+    public String getTags(){
+        return tags;
+    }
+
+    public String getTagsItems(){
+        return tagsItems;
+    }
+
+    public String getItemsTags(){
+        return itemsTags;
     }
     
+    public void setItems(String items){
+        this.items = items;
+    }
+
+    public void setTags(String tags){
+        this.tags = tags;
+    }
+
+    public void setTagsItems(String tagsItems){
+       this.tagsItems = tagsItems;
+    }
+
+    public void setItemsTags(String itemTags){
+        this.itemsTags = itemTags;
+    }
+
 }
