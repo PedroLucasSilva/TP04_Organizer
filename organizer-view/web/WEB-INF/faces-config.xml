@@ -7,14 +7,13 @@
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>true</from-outcome>
-            <if>#{loginMB.currentUser != null}</if>
-            <to-view-id>/index.xhtml</to-view-id>
+            <to-view-id>/settings.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
         <from-view-id>/registerUser.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>true</from-outcome>
+            <from-outcome>create</from-outcome>
             <to-view-id>/login.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
@@ -22,9 +21,19 @@
             <to-view-id>/registerUser.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <application>
-      <action-listener>org.primefaces.application.DialogActionListener</action-listener>
-      <navigation-handler>org.primefaces.application.DialogNavigationHandler</navigation-handler>
-      <view-handler>org.primefaces.application.DialogViewHandler</view-handler>
-    </application>
+    <navigation-rule>
+        <from-view-id>/settings.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>update</from-outcome>
+            <to-view-id>/settings.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>delete</from-outcome>
+            <to-view-id>/login.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>false</from-outcome>
+            <to-view-id>/settings.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

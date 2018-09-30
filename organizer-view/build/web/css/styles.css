@@ -252,3 +252,10 @@
     background-color: #1b1e24;
     border-color: rgba(255, 255, 255, 0.1);
 }
+
+.customButton .ui-button{
+
+  background-color: #1b1e24;
+  border-color: #1b1e24;
+  color:#fff;
+}
