@@ -14,10 +14,10 @@ $(function () {
     $('#formCreateItem\\:selectOfItemType').click(function () {
 	
         if (document.getElementById('formCreateItem:selectOfItemType').value == 'SIM') {
-            document.getElementById('formCreateItem:dateOfItem').readOnly = true;           
+            document.getElementById('formCreateItem:dateOfItem').disabled = true;           
             $('#helpItem').show();
         } else {
-            document.getElementById('formCreateItem:dateOfItem').readOnly = false;
+            document.getElementById('formCreateItem:dateOfItem').disabled = false;
             $('#helpItem').hide();
         }	
     });

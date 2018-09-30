@@ -12,8 +12,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.el.ELContext;
 import javax.enterprise.context.SessionScoped;
-import javax.faces.bean.ManagedProperty;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 @Named(value="tagDialog")
@@ -21,17 +22,18 @@ import javax.inject.Named;
 public class TagDialog implements Serializable{  
     private List<Tag> tag;
     private IKeepTag keepTag;
-    
-    @ManagedProperty(value="#loginMB")
     private LoginMB user;
     
-    public TagDialog() {      
+    public TagDialog() throws PersistenceException, BusinessException {      
         tag = new ArrayList<>();
+        FacesContext context = FacesContext.getCurrentInstance();
+        ELContext elContext = context.getELContext();
+        user = (LoginMB) elContext.getELResolver().getValue(elContext, null, "loginMB");
         try {
             keepTag = new KeepTagProxy();
             tag = keepTag.listAlltag(user.getCurrentUser());
            
-        } catch (SocketException | UnknownHostException | PersistenceException | BusinessException ex) {
+        } catch (SocketException | UnknownHostException ex) {
             Logger.getLogger(TagDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

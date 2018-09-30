@@ -38,7 +38,7 @@ public class LoginMB implements Serializable {
    
     public String getUserLogin() throws PersistenceException, BusinessException{
         currentUser = keepUser.getUserLogin(currentUser.getCodEmail(), 
-                PasswordCriptography.generateMd5(currentUser.getUserPassword()));
+        PasswordCriptography.generateMd5(currentUser.getUserPassword()));
         
         if(currentUser == null){
             currentUser = new User();

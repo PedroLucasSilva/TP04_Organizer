@@ -7,7 +7,6 @@
         <from-view-id>/login.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>true</from-outcome>
-            <if>#{loginMB.currentUser != null}</if>
             <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
@@ -20,6 +19,13 @@
         <navigation-case>
             <from-outcome>false</from-outcome>
             <to-view-id>/registerUser.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/createItem.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>true</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
     <application>

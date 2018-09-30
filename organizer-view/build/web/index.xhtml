@@ -34,10 +34,11 @@
                                 <h:panelGroup layout="block" class="panel-body accordion-menu">
                                     <ul id = "ulItens">
                                         <li>
-                                            <a id="indexCreateItem">Criar Item</a>
+                                            <h:link outcome="createItem.jsf" value="Criar Item"></h:link>
                                         </li>
                                         
-                                        <ui:repeat var = "item" value = "#{itemMB.itemList}">
+                                        #{itemFilterMB.itemListFilter()}
+                                        <ui:repeat var = "item" value = "#{itemFilterMB.itemList}">
                                             <ui:fragment rendered="#{item.identifierItem eq 'TAR'}">
                                                 <li id = "#{item.identifierItem}">
                                                     
