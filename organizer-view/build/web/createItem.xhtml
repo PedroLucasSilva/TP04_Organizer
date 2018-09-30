@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
     <h:head>
         <title>Organizer</title>
@@ -12,10 +13,13 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge"></meta>
         <meta name="viewport" content="width=device-width, initial-scale=1"></meta>      
         <link rel="StyleSheet" type="text/css" href="css/theme-default.css" id="themeStyle"/>
-        <link rel="StyleSheet" type="text/css" href="css/styles.css"/>
+        <link rel="StyleSheet" type="text/css" href="css/styles.css"/>   
+         <!-- 
+        *********** Importação de JS ***********         
+        -->
+        <script type="text/javascript" src="js/configuracoes.js"></script>
     </h:head>
-    <h:body>
-        
+    <h:body>        
         <h:panelGroup layout="block" class="page-container">
             <!-- Menu lateral -->           
             <h:panelGroup layout="block" class="page-content">
@@ -24,7 +28,7 @@
                     <h:panelGroup layout="block" class="row">
                         <h:panelGroup layout="block" class="col-md-12">
                             <p></p>
-                            <h:form class="form-horizontal">
+                            <h:form class="form-horizontal" id="formCreateItem">
                                 <h:panelGroup layout="block" class="panel panel-default">
                                     <h:panelGroup layout="block" class="panel-body">
                                         <h1 style="text-align:center">Criar Item</h1>
@@ -34,7 +38,7 @@
                                                 <h:selectOneMenu class="form-control select" id="selectOfItemType" value="#{itemMB.selectType}"> 
                                                     <f:selectItem itemValue = "SIM" itemLabel = "Simples" /> 
                                                     <f:selectItem itemValue = "LEM" itemLabel = "Lembrete" /> 
-                                                    <f:selectItem itemValue = "TAR" itemLabel = "Lembrete" />
+                                                    <f:selectItem itemValue = "TAR" itemLabel = "Tarefa" />
                                                 </h:selectOneMenu>                                 
                                             </h:panelGroup>
                                         </h:panelGroup>
@@ -57,7 +61,7 @@
                                             <label class="col-md-3 col-xs-12 control-label">Data: </label>
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
-                                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                                                    <span class="input-group-addon"><span class="fa fa-calendar"></span></span>                                                    
                                                     <h:inputText class="form-control" id="dateOfItem" label="Receipt Date" value="#{itemMB.item.dateItem}" readonly ="true">
                                                         <f:convertDateTime pattern="yyyy-M-d" />
                                                     </h:inputText>
@@ -102,14 +106,18 @@
                 <h:panelGroup class="container-fluid" layout="block">  
                     <h:panelGroup class="panel panel-default" layout="block">
                         <h:panelGroup class="panel-body" id="scroll" layout="block">
-                            <ul id="ulTags">
-                                
-                            </ul>
+                            <ui:repeat var = "tag" value = "#{tagDialog.tag}">
+                                <h:outputText value="#{tag.tagName}" />                        
+                            </ui:repeat>
                         </h:panelGroup>
                     </h:panelGroup>
                 </h:panelGroup>
+                <hr></hr>                
+                <h:commandButton value="Cancelar" class="btn btn-secondary" />
+                <h:commandButton value="Salvar" class="btn btn-primary pull-right"/>               
             </h:panelGroup>
         </p:dialog>
+        
        
     </h:body>
 </html>

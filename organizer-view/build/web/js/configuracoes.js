@@ -11,14 +11,15 @@ $(function () {
         $("#logoutModal").modal();
     });
 
-    $("#selectOfItemType").click(function () {
-        if ($('#selectOfItemType option:selected').val() == 'SIM') {
-            document.querySelector('#dateOfItem').readOnly = true;
+    $('#formCreateItem\\:selectOfItemType').click(function () {
+	
+        if (document.getElementById('formCreateItem:selectOfItemType').value == 'SIM') {
+            document.getElementById('formCreateItem:dateOfItem').readOnly = true;           
             $('#helpItem').show();
         } else {
-            document.querySelector('#dateOfItem').readOnly = false;
+            document.getElementById('formCreateItem:dateOfItem').readOnly = false;
             $('#helpItem').hide();
-        }
+        }	
     });
-
+	
 })

@@ -2,7 +2,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
     
     <h:head>
         <title>Organizer</title>
@@ -50,7 +52,7 @@
                                             <h:panelGroup layout="block" class="col-md-6 col-xs-12">
                                                 <h:panelGroup layout="block" class="input-group">
                                                     <span class="input-group-addon"><span class="fa fa-tag"></span></span>
-                                                    <h:inputText class="form-control" readonly="true" id="tags" value="#{itemMB.listTag}"/>                                
+                                                    <h:inputText onclick="PF('selectTags').show();" class="form-control" readonly="true" id="tags" value="#{itemMB.listTag}"/>                                
                                                 </h:panelGroup>
                                             </h:panelGroup>
                                         </h:panelGroup>
@@ -63,6 +65,37 @@
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>
+        
+              <!-- 
+        *********** Modal de Tags ***********         
+        -->
+          
+        <p:dialog header="Adicionar Tags:" widgetVar="selectTags" width="500">
+            <h:panelGroup layout="block" class="modal-body">
+                <h:panelGroup class="form-group" layout="block">
+                    <label>Selecionados: </label>
+                    <h:panelGroup class="input-group" layout="block">
+                        <span class="input-group-addon"><span class="fa fa-tag"></span></span>
+                        <h:inputText class="form-control" readonly="true"/>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <hr></hr>
+                <label>Existentes: </label>
+                <h:panelGroup class="container-fluid" layout="block">  
+                    <h:panelGroup class="panel panel-default" layout="block">
+                        <h:panelGroup class="panel-body" id="scroll" layout="block">
+                            <ui:repeat var = "tag" value = "#{tagDialog.tag}">
+                                <h:outputText value="#{tag.tagName}" />                        
+                            </ui:repeat>
+                        </h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup>
+                <hr></hr>                
+                <h:commandButton value="Cancelar" class="btn btn-secondary" />
+                <h:commandButton value="Salvar" class="btn btn-primary pull-right"/>               
+            </h:panelGroup>
+        </p:dialog>
+
     </h:body>
 </html>
 

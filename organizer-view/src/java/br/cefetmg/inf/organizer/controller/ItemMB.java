@@ -3,6 +3,7 @@ package br.cefetmg.inf.organizer.controller;
 import br.cefetmg.inf.organizer.model.domain.Item;
 import br.cefetmg.inf.organizer.model.domain.ItemTag;
 import br.cefetmg.inf.organizer.model.domain.Tag;
+import br.cefetmg.inf.organizer.model.domain.User;
 import br.cefetmg.inf.organizer.model.service.IKeepItem;
 import br.cefetmg.inf.organizer.model.service.IKeepItemTag;
 import br.cefetmg.inf.organizer.model.service.IKeepTag;
@@ -93,7 +94,13 @@ public class ItemMB implements Serializable{
             item.setIdentifierStatus(null);
         }
         
-        item.setUser(user.getCurrentUser());
+        item.setIdentifierItem(selectType);
+        
+        User u = new User();
+        u.setCodEmail("1");
+                
+        //item.setUser(user.getCurrentUser());
+        item.setUser(u);
         
         success = keepItem.createItem(item);
         
