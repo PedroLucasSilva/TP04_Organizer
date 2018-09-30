@@ -242,4 +242,13 @@
     background-color: #121418;
 }
 
-
+.customBar .ui-widget-header{
+  background-color: #a30d0d;
+  color: #fff2f2;
+  
+}
+.customError{
+    color:#ffffff;
+    background-color: #1b1e24;
+    border-color: rgba(255, 255, 255, 0.1);
+}

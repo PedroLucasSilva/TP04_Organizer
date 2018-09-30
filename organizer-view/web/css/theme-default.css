@@ -3869,7 +3869,7 @@ background: #1caf9a !important;
   float: left;
   width: 100%;
   min-height: 100%;
-  background: url("../img/bg.png") left top repeat #1b1e24;
+  background: #1b1e24;
 }
 .login-container .login-box {
   width: 400px;
@@ -4868,13 +4868,13 @@ background: #1caf9a !important;
 /* errors */
 .error-container {
   width: 300px;
-  margin: 50px auto 0px;
+  margin: 20px auto 0px;
 }
 .error-container .error-code {
   float: left;
   width: 100%;
   font-size: 30px;
-  line-height: 130px;
+  line-height: 50px;
   text-align: center;
   color: #a8130b;
   font-weight: 300;

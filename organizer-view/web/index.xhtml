@@ -37,7 +37,8 @@
                                             <a id="indexCreateItem">Criar Item</a>
                                         </li>
                                         
-                                        <ui:repeat var = "item" value = "#{itemMB.itemList}">
+                                        #{itemFilterMB.itemListFilter()}
+                                        <ui:repeat var = "item" value = "#{itemFilterMB.itemList}">
                                             <ui:fragment rendered="#{item.identifierItem eq 'TAR'}">
                                                 <li id = "#{item.identifierItem}">
                                                     

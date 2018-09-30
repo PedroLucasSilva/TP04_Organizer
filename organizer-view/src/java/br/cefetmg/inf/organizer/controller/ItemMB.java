@@ -37,15 +37,15 @@ public class ItemMB implements Serializable{
     private ArrayList<Tag> tagItem;
 
     public ItemMB() throws SocketException, UnknownHostException {
-        item = new Item();
-        itemTag = new ItemTag();
-        keepItem = new KeepItemProxy();
-        keepTag = new KeepTagProxy();
-        keepItemTag = new KeepItemTagProxy();
-        listTag = "";
-        selectType = "";
-        idItemString = "";
-        tagItem = new ArrayList();
+        this.item = new Item();
+        this.itemTag = new ItemTag();
+        this.keepItem = new KeepItemProxy();
+        this.keepTag = new KeepTagProxy();
+        this.keepItemTag = new KeepItemTagProxy();
+        this.listTag = "";
+        this.selectType = "";
+        this.idItemString = "";
+        this.tagItem = new ArrayList();
     }
 
     public Item getItem() {
@@ -95,12 +95,8 @@ public class ItemMB implements Serializable{
         }
         
         item.setIdentifierItem(selectType);
-        
-        User u = new User();
-        u.setCodEmail("1");
                 
-        //item.setUser(user.getCurrentUser());
-        item.setUser(u);
+        item.setUser(user.getCurrentUser());
         
         success = keepItem.createItem(item);
         
