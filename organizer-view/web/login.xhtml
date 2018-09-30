@@ -15,8 +15,10 @@
         <link rel="StyleSheet" type="text/css" href="css/styles.css"/>
     </h:head>
     <h:body>
-        <c:if test="#{loginMB.currentUser.codEmail.length() > 0}">
-            #{facesContext.externalContext.dispatch("index.jsf")}
+        <c:if test="#{facesContext.externalContext != null}">
+            <c:if test="#{loginMB.currentUser.codEmail.length() > 0}">
+                #{facesContext.externalContext.dispatch("index.jsf")}
+            </c:if>
         </c:if>
         <h:panelGroup layout="block" class="login-container">
 
@@ -28,7 +30,7 @@
                         <h:panelGroup layout="block" class="form-group">
                             <h:panelGroup layout="block" class="col-md-12">
                                 <p:inputText id="email" type="text" class="form-control" placeholder="Email" required="true" requiredMessage="Informe seu email!" value="#{loginMB.currentUser.codEmail}"/>
-                                 <p:message for="email"/>
+                                <p:message for="email"/>
                             </h:panelGroup>
                         </h:panelGroup>
                         <h:panelGroup layout="block" class="form-group">
@@ -49,5 +51,36 @@
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>
+        <p:dialog id="errorDialog" widgetVar="errorDialog"  header="Erro" appendTo="@(body)" resizable="false" draggable="false" styleClass="customBar">
+            <h:form id="errorForm">
+                <h:panelGroup layout="block" class="error-container">
+                    <h:panelGroup layout="block" class="error-code"> 
+                        <h:inputHidden id="errorCodeInput"></h:inputHidden>
+                        <h:message  id="errorCode" for="errorCodeInput"></h:message> 
+                    </h:panelGroup> 
+                    <h:panelGroup layout="block" class="error-text"> 
+                        <h:inputHidden id="errorTextInput"></h:inputHidden>
+                        <h:message id="errorText" for="errorTextInput"></h:message> 
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="error-subtext">
+                        <h:inputHidden id="errorSubTextInput"></h:inputHidden>
+                        <h:message id="errorSubText" for="errorSubTextInput"></h:message> 
+                    </h:panelGroup>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+        <h:outputScript library="js" name="jquery.min.js" />
+        <h:outputScript library="js" name="jquery-ui.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="plugins.js" />
+        <h:outputScript library="js" name="actions.js"/>
+        <h:outputScript library="js" name="script.js"/>
+        <h:outputScript library="js" name="tagMenu.js"/>
+        <h:outputScript library="js" name="tags.js"/>
+        <h:outputScript library="js" name="configuracoes.js"/>
+        <h:outputScript library="js" name="modalOptions.js"/>
+        <h:outputScript library="js" name="filter.js"/>
+        <h:outputScript library="js" name="theme.js"/>
+        <h:outputScript library="js" name="settings.js"/>
     </h:body>
 </html>

@@ -11,7 +11,9 @@ import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import org.primefaces.PrimeFaces;
 
 
 @Named(value = "loginMB")
@@ -42,11 +44,13 @@ public class LoginMB implements Serializable {
         
         if(currentUser == null){
             currentUser = new User();
-            //Dialog de erro
-            System.out.println("Erro no login");
+            FacesContext.getCurrentInstance().addMessage("errorForm:errorCodeInput", new FacesMessage("Error 406!"));
+            FacesContext.getCurrentInstance().addMessage("errorForm:errorTextInput", new FacesMessage("O login falhou!"));
+            FacesContext.getCurrentInstance().addMessage("errorForm:errorSubTextInput", new FacesMessage("Verifique seu login e/ou senha ou cadastre-se."));
+            PrimeFaces current = PrimeFaces.current();
+            current.executeScript("PF('errorDialog').show();");
             return "false";
         }else{
-            //Redireciona p/ index
             return "true";
         }
     }

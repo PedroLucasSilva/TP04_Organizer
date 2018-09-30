@@ -50,3 +50,6 @@ CREATE TABLE item_tag
   seq_tag integer NOT NULL,
   CONSTRAINT item_tag_pkey PRIMARY KEY (seq_item, seq_tag)
 );
+
+ALTER TABLE item ADD FOREIGN KEY (cod_email) references usuario (cod_email) on delete cascade;
+ALTER TABLE tag ADD FOREIGN KEY (cod_email) references usuario (cod_email) on delete cascade;
