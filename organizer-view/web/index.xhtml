@@ -49,7 +49,7 @@
                                                             <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
                                                             <h:panelGroup class="checkmark"></h:panelGroup>
                                                         </label>
-                                                        <button action="#{itemMB.setItem(itemMB.searchItemById(item.seqItem))}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
+                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
                                                             <i class="fa fa-ellipsis-v"></i>
                                                         </button>
 
@@ -70,7 +70,7 @@
 
                                                 <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
                                                     <li id = "#{item.identifierItem}">
-                                                        <button action="#{itemMB.setItem(itemMB.searchItemById(item.seqItem))}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
+                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
                                                             <i class="fa fa-ellipsis-v"></i>
                                                         </button>
 
