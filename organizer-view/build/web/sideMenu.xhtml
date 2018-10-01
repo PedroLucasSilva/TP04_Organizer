@@ -28,7 +28,7 @@
             </li>
 
             <li>
-                <a href="/organizer/servletcontroller?process=LoadMax"><span class="fa fa-comments"></span> <span class="xn-text">Falar com o MAX</span></a>
+                <h:link outcome="max"><span class="fa fa-comments"></span> <span class="xn-text">Falar com o MAX</span></h:link>
             </li>
 
             <li class="xn-openable">
@@ -66,7 +66,7 @@
             <li class="xn-openable">
                 <h:link><span class="fa fa-tag"></span> <span class="xn-text">Tags</span></h:link>
 
-                <f:event listener="#{tagMB.listAllTag()}" type="preRenderView" />
+                <f:event listener="#{tagMB.listAllTag()}" type="preRenderView" id="eventTag"/>
                 
                 <ul id="ulTagMenu">
                     <li>
@@ -78,7 +78,7 @@
                         <li class="tagLine"><a>
                                 <label class="container">#{list.tagName}
                                     <h:selectBooleanCheckbox value="#{list.tagName}"></h:selectBooleanCheckbox>
-                                    <span class="checkmarkTarefa"></span>
+                                    <span class="checykmarkTarefa"></span>
                                     <h:button class="buttonStyle delete" rendered="#{list.tagName != 'Concluidos'}" ><i class="glyphicon glyphicon-trash"></i></h:button>
                                     <h:button class="buttonStyle editer" rendered="#{list.tagName != 'Concluidos'}" onclick="PF('updateTagModal').show();" ><i class="glyphicon glyphicon-cog"></i></h:button>
                                 </label>
