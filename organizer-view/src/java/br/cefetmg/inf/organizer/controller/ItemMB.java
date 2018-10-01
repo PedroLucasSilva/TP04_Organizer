@@ -93,6 +93,26 @@ public class ItemMB implements Serializable{
     public void setDate(Date date) {
         this.date = date;
     }
+    
+    public String redirectToUpdate(Long idItem) throws PersistenceException{
+        
+        item = keepItem.searchItemById(idItem);
+        
+        if (item != null) {
+            switch (item.getIdentifierItem()) {
+                case "TAR":
+                    return "updateTarefa";
+                case "LEM":
+                    return "updateLembrete";
+                default:
+                    return "updateSimples";
+            }
+        } else {
+            System.out.println("erro");
+            return "false";
+        }
+   
+    }
         
     public String createItem() throws PersistenceException, BusinessException {
         
@@ -157,10 +177,9 @@ public class ItemMB implements Serializable{
 
     }
     
-    public String deleteItem() throws PersistenceException{
+    public String deleteItem(Long idItem) throws PersistenceException{
         
         boolean success;        
-        Long idItem = Long.parseLong(idItemString); 
        
         success = keepItem.deleteItem(idItem, user.getCurrentUser());
         
@@ -169,7 +188,7 @@ public class ItemMB implements Serializable{
         }
         
         if (success) {
-            return "true";
+            return "delete";
         } else {
             System.out.println("erro");
             return "false";

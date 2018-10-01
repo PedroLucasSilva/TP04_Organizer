@@ -22,6 +22,25 @@
         </navigation-case>
     </navigation-rule>
     <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>delete</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>updateSimples</from-outcome>
+            <to-view-id>/updateSimples.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>updateTarefa</from-outcome>
+            <to-view-id>/updateTarefa.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>updateLembrete</from-outcome>
+            <to-view-id>/updateLembrete.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
         <from-view-id>/settings.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>update</from-outcome>

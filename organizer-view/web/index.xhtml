@@ -14,6 +14,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet" type="text/css" href="css/theme-default.css" id="themeStyle"/>
         <link rel="stylesheet" href="css/styles.css?v=1"/>
+        <style>
+            .ui-state-default{
+                background-color: white;
+            }
+        </style>
     </h:head>
     <h:body>
         
@@ -49,11 +54,17 @@
                                                             <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
                                                             <h:panelGroup class="checkmark"></h:panelGroup>
                                                         </label>
-                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
-                                                            <i class="fa fa-ellipsis-v"></i>
-                                                        </button>
-
-                                                            <p:accordionPanel activeIndex="null" class="dropdownlink">
+                                                        <form>
+                                                            <button  action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
+                                                                <i class="fa fa-trash-o"></i>
+                                                            </button>
+                                                        </form>
+                                                        <form>
+                                                            <button action="#{itemMB.redirectToUpdate(item.seqItem)}" class="opcoesItem btOption" value="#{item.identifierItem}">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                        </form>
+                                                        <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
                                                             <p:tab title="#{item.nameItem}">
                                                                 <ul class="submenuItems">
                                                                     <li id="subItem" class="liDescricao">
@@ -70,11 +81,17 @@
 
                                                 <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
                                                     <li id = "#{item.identifierItem}">
-                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
-                                                            <i class="fa fa-ellipsis-v"></i>
-                                                        </button>
-
-                                                        <p:accordionPanel activeIndex="null" class="dropdownlink">
+                                                        <form>
+                                                            <button action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
+                                                                <i class="fa fa-trash-o"></i>
+                                                            </button>
+                                                        </form>
+                                                        <form>
+                                                            <button action="#{itemMB.redirectToUpdate(item.seqItem)}" class="opcoesItem btOption" value="#{item.identifierItem}">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+                                                        </form>
+                                                        <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
                                                             <p:tab title="#{item.nameItem}" >
                                                                 <ul class="submenuItems">
                                                                     <li id="subItem" class="liDescricao">
@@ -99,7 +116,5 @@
             </h:panelGroup>
         </h:panelGroup>
     </h:body>
-    
-    <p:dialog header="Opções de Item" widgetVar="dlg2" modal="true" width="590" height="170">
-    </p:dialog>   
+   
 </html>
