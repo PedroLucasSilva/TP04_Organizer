@@ -1,5 +1,4 @@
 /* 
-    Created on : 30/07/2018, 11:12:19
     Author     : Ruan Bertuce
 */
 
@@ -218,27 +217,19 @@ function loadMax(){
 loadMax();
 
 function updateBD() {
+    document.getElementById('itemsData:itemsID').value = JSON.stringify( itemsID );
+    document.getElementById('itemsData:itemsType').value = JSON.stringify( convertedItemsType( itemsType ) ); 
+    document.getElementById('itemsData:itemsName').value = JSON.stringify( itemsName ); 
+    document.getElementById('itemsData:itemsDescription').value = JSON.stringify( itemsDescription ); 
+    document.getElementById('itemsData:itemsDate').value = JSON.stringify( convertedItemsDate( itemsDate ) ); 
+    document.getElementById('itemsData:itemsStatus').value = JSON.stringify( itemsStatus ); 
+    document.getElementById('itemsData:tagsID').value = JSON.stringify( tagsID ); 
+    document.getElementById('itemsData:tagsName').value = JSON.stringify( tagsName ); 
+    document.getElementById('itemsData:tagsItems').value = JSON.stringify( convertedTagsItems( tagsItems ) ); 
+    document.getElementById('itemsData:itemsTags').value = JSON.stringify( convertedItemsTags( itemsTags ) ); 
 
-    $.ajax({
-        url : '/organizer/servletcontroller',
-        type: "POST",
-        data : {
-            process : "UpdateMaxBD",
-            itemsID  : JSON.stringify( itemsID ),
-            itemsType : JSON.stringify( convertedItemsType( itemsType ) ),
-            itemsName : JSON.stringify( itemsName ),
-            itemsDescription : JSON.stringify( itemsDescription ),
-            itemsDate : JSON.stringify( convertedItemsDate( itemsDate ) ),
-            itemsStatus : JSON.stringify( itemsStatus ),
-            tagsID : JSON.stringify( tagsID ),
-            tagsName : JSON.stringify( tagsName ),
-            tagsItems : JSON.stringify( convertedTagsItems( tagsItems ) ),
-            itemsTags : JSON.stringify( convertedItemsTags( itemsTags ) )
-        },
-        success : function(responseText) {
-            window.location.href = "/organizer/servletcontroller?process=LoadItem";
-        }
-    }); 
+    document.getElementById("itemsData:enviar").click();
+    window.location.href = "max.jsf";
 }
 
 // --| Funções de verificação |--
@@ -630,6 +621,7 @@ myVoice.volume = 1;
 
 //Decide as falas do MAX de acordo com o que foi reconhecido
 function sayMax() {
+    
     txtTranscripted = document.getElementById( 'transcription' ).value;
 
     if( txtTranscripted.localeCompare("") == 0 ){
@@ -1025,7 +1017,7 @@ function sayMax() {
 
     if( txtTranscripted.toLowerCase().indexOf( "pesquisar itens" ) == 0 ){   
 
-        $.ajax({
+        /*$.ajax({
             url : '/organizer/servletcontroller',
             type: "POST",
             data : {
@@ -1035,14 +1027,14 @@ function sayMax() {
                 response = responseText;
                 alert(responseText);
             }
-        });
+        });*/
 
         var results = searchItems();
 
         if( results.length > 0 ){
             document.getElementById( 'speech' ).value = "A pesquisa retornou:";
 
-            $.ajax({
+            /*$.ajax({
                 url : '/organizer/servletcontroller',
                 type: "POST",
                 data : {
@@ -1053,7 +1045,7 @@ function sayMax() {
                     response = responseText;
                     alert(responseText);
                 }
-            });
+            });*/
 
             document.getElementById( 'speech' ).value += buildSearchResults( results );     
             myVoice.text = "A pesquisa retornou:";
@@ -1068,36 +1060,36 @@ function sayMax() {
     if( txtTranscripted.toLowerCase().indexOf( "pesquisar item usando " ) == 0 ){       
         var keyword = txtTranscripted.slice( 22, txtTranscripted.length );  
 
-        $.ajax({
-            url : '/organizer/servletcontroller',
-            type: "POST",
-            data : {
-                function : "searchItem",
-                keyword : keyword
-            },
-            success : function(responseText) {
-                response = responseText;
-                alert(responseText);
-            }
-        });
+        // $.ajax({
+        //     url : '/organizer/servletcontroller',
+        //     type: "POST",
+        //     data : {
+        //         function : "searchItem",
+        //         keyword : keyword
+        //     },
+        //     success : function(responseText) {
+        //         response = responseText;
+        //         alert(responseText);
+        //     }
+        // });
 
         var results = searchItem( keyword );    
 
         if( results.length > 0 ){
             document.getElementById( 'speech' ).value = "A pesquisa retornou:";
 
-            $.ajax({
-                url : '/organizer/servletcontroller',
-                type: "POST",
-                data : {
-                    function : "buildSearchResults",
-                    results : results
-                },
-                success : function(responseText) {
-                    response = responseText;
-                    alert(responseText);
-                }
-            });
+            // $.ajax({
+            //     url : '/organizer/servletcontroller',
+            //     type: "POST",
+            //     data : {
+            //         function : "buildSearchResults",
+            //         results : results
+            //     },
+            //     success : function(responseText) {
+            //         response = responseText;
+            //         alert(responseText);
+            //     }
+            // });
 
             document.getElementById( 'speech' ).value += buildSearchResults( results );   
             myVoice.text = "A pesquisa retornou:"; 
@@ -1112,36 +1104,36 @@ function sayMax() {
     if( txtTranscripted.toLowerCase().indexOf( "pesquisar item pelo tipo usando " ) == 0 ){     
         var keyword = txtTranscripted.slice( 32, txtTranscripted.length ); 
 
-        $.ajax({
-            url : '/organizer/servletcontroller',
-            type: "POST",
-            data : {
-                function : "searchItemByType",
-                keyword : keyword
-            },
-            success : function(responseText) {
-                response = responseText;
-                alert(responseText);
-            }
-        });
+        // $.ajax({
+        //     url : '/organizer/servletcontroller',
+        //     type: "POST",
+        //     data : {
+        //         function : "searchItemByType",
+        //         keyword : keyword
+        //     },
+        //     success : function(responseText) {
+        //         response = responseText;
+        //         alert(responseText);
+        //     }
+        // });
 
         var results = searchItemByType( keyword );
 
         if( results.length > 0 ){
             document.getElementById( 'speech' ).value = "A pesquisa retornou:";
 
-            $.ajax({
-                url : '/organizer/servletcontroller',
-                type: "POST",
-                data : {
-                    function : "buildSearchResults",
-                    results : results
-                },
-                success : function(responseText) {
-                    response = responseText;
-                    alert(responseText);
-                }
-            });
+            // $.ajax({
+            //     url : '/organizer/servletcontroller',
+            //     type: "POST",
+            //     data : {
+            //         function : "buildSearchResults",
+            //         results : results
+            //     },
+            //     success : function(responseText) {
+            //         response = responseText;
+            //         alert(responseText);
+            //     }
+            // });
 
             document.getElementById( 'speech' ).value += buildSearchResults( results );
             myVoice.text = "A pesquisa retornou:";       
@@ -1156,36 +1148,36 @@ function sayMax() {
     if( txtTranscripted.toLowerCase().indexOf( "pesquisar item pelo nome usando " ) == 0 ){     
         var keyword = txtTranscripted.slice( 32, txtTranscripted.length );  
 
-        $.ajax({
-            url : '/organizer/servletcontroller',
-            type: "POST",
-            data : {
-                function : "searchItemByName",
-                keyword : keyword
-            },
-            success : function(responseText) {
-                response = responseText;
-                alert(responseText);
-            }
-        });
+        // $.ajax({
+        //     url : '/organizer/servletcontroller',
+        //     type: "POST",
+        //     data : {
+        //         function : "searchItemByName",
+        //         keyword : keyword
+        //     },
+        //     success : function(responseText) {
+        //         response = responseText;
+        //         alert(responseText);
+        //     }
+        // });
 
         var results = searchItemByName( keyword );
 
         if( results.length > 0 ){
             document.getElementById( 'speech' ).value = "A pesquisa retornou:";
 
-            $.ajax({
-                url : '/organizer/servletcontroller',
-                type: "POST",
-                data : {
-                    function : "buildSearchResults",
-                    results : results
-                },
-                success : function(responseText) {
-                    response = responseText;
-                    alert(responseText);
-                }
-            });
+            // $.ajax({
+            //     url : '/organizer/servletcontroller',
+            //     type: "POST",
+            //     data : {
+            //         function : "buildSearchResults",
+            //         results : results
+            //     },
+            //     success : function(responseText) {
+            //         response = responseText;
+            //         alert(responseText);
+            //     }
+            // });
 
             document.getElementById( 'speech' ).value += buildSearchResults( results );
             myVoice.text = "A pesquisa retornou:";      
@@ -1200,36 +1192,36 @@ function sayMax() {
     if( txtTranscripted.toLowerCase().indexOf( "pesquisar item pela descrição usando " ) == 0 ){      
         var keyword = txtTranscripted.slice( 37, txtTranscripted.length );    
 
-        $.ajax({
-            url : '/organizer/servletcontroller',
-            type: "POST",
-            data : {
-                function : "searchItemByDescription",
-                keyword : keyword
-            },
-            success : function(responseText) {
-                response = responseText;
-                alert(responseText);
-            }
-        });
+        // $.ajax({
+        //     url : '/organizer/servletcontroller',
+        //     type: "POST",
+        //     data : {
+        //         function : "searchItemByDescription",
+        //         keyword : keyword
+        //     },
+        //     success : function(responseText) {
+        //         response = responseText;
+        //         alert(responseText);
+        //     }
+        // });
 
         var results = searchItemByDescription( keyword );
 
         if( results.length > 0 ){
             document.getElementById( 'speech' ).value = "A pesquisa retornou:";
 
-            $.ajax({
-                url : '/organizer/servletcontroller',
-                type: "POST",
-                data : {
-                    function : "buildSearchResults",
-                    results : results
-                },
-                success : function(responseText) {
-                    response = responseText;
-                    alert(responseText);
-                }
-            });
+            // $.ajax({
+            //     url : '/organizer/servletcontroller',
+            //     type: "POST",
+            //     data : {
+            //         function : "buildSearchResults",
+            //         results : results
+            //     },
+            //     success : function(responseText) {
+            //         response = responseText;
+            //         alert(responseText);
+            //     }
+            // });
 
             document.getElementById( 'speech' ).value += buildSearchResults( results );     
             myVoice.text = "A pesquisa retornou:";  
@@ -1244,35 +1236,35 @@ function sayMax() {
     if( txtTranscripted.toLowerCase().indexOf( "pesquisar item pela data usando " ) == 0 ){     
         var keyword = convertDate( txtTranscripted.slice( 32, txtTranscripted.length ) );  
 
-        $.ajax({
-            url : '/organizer/servletcontroller',
-            type: "POST",
-            data : {
-                function : "searchItemByDate",
-                keyword : keyword
-            },
-            success : function(responseText) {
-                response = responseText;
-                alert(responseText);
-            }
-        });
+        // $.ajax({
+        //     url : '/organizer/servletcontroller',
+        //     type: "POST",
+        //     data : {
+        //         function : "searchItemByDate",
+        //         keyword : keyword
+        //     },
+        //     success : function(responseText) {
+        //         response = responseText;
+        //         alert(responseText);
+        //     }
+        // });
 
         var results = searchItemByDate( keyword );
         if( results.length > 0 ){
             document.getElementById( 'speech' ).value = "A pesquisa retornou:";
 
-            $.ajax({
-                url : '/organizer/servletcontroller',
-                type: "POST",
-                data : {
-                    function : "buildSearchResults",
-                    results : results
-                },
-                success : function(responseText) {
-                    response = responseText;
-                    alert(responseText);
-                }
-            });
+            // $.ajax({
+            //     url : '/organizer/servletcontroller',
+            //     type: "POST",
+            //     data : {
+            //         function : "buildSearchResults",
+            //         results : results
+            //     },
+            //     success : function(responseText) {
+            //         response = responseText;
+            //         alert(responseText);
+            //     }
+            // });
 
             document.getElementById( 'speech' ).value += buildSearchResults( results ); 
             myVoice.text = "A pesquisa retornou:";      
@@ -1287,35 +1279,35 @@ function sayMax() {
     if( txtTranscripted.toLowerCase().indexOf( "pesquisar item pela tag usando " ) == 0 ){      
         var keyword =  txtTranscripted.slice( 31, txtTranscripted.length );  
 
-        $.ajax({
-            url : '/organizer/servletcontroller',
-            type: "POST",
-            data : {
-                function : "searchItemByTag",
-                keyword : keyword
-            },
-            success : function(responseText) {
-                response = responseText;
-                alert(responseText);
-            }
-        });
+        // $.ajax({
+        //     url : '/organizer/servletcontroller',
+        //     type: "POST",
+        //     data : {
+        //         function : "searchItemByTag",
+        //         keyword : keyword
+        //     },
+        //     success : function(responseText) {
+        //         response = responseText;
+        //         alert(responseText);
+        //     }
+        // });
                 
         var results = searchItemByTag( keyword );
         if( results.length > 0 ){
             document.getElementById( 'speech' ).value = "A pesquisa retornou:";
 
-            $.ajax({
-                url : '/organizer/servletcontroller',
-                type: "POST",
-                data : {
-                    function : "buildSearchResults",
-                    results : results
-                },
-                success : function(responseText) {
-                    response = responseText;
-                    alert(responseText);
-                }
-            });
+            // $.ajax({
+            //     url : '/organizer/servletcontroller',
+            //     type: "POST",
+            //     data : {
+            //         function : "buildSearchResults",
+            //         results : results
+            //     },
+            //     success : function(responseText) {
+            //         response = responseText;
+            //         alert(responseText);
+            //     }
+            // });
 
             document.getElementById( 'speech' ).value += buildSearchResults( results );
             myVoice.text = "A pesquisa retornou:";       
@@ -1589,6 +1581,7 @@ else{
             sayMax();
             btn1.classList.remove('is-loading');
             btn2.classList.remove('is-loading');
+            
             textareaIsFilled = 0;
         }
         else{ 
@@ -1624,6 +1617,7 @@ else{
         sayMax();
         btn1.classList.remove('is-loading');
         btn2.classList.remove('is-loading'); 
+        
         textareaIsFilled = 0;
     }
 }

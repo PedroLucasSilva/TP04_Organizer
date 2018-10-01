@@ -24,7 +24,11 @@
         
         <h:panelGroup class="page-container" layout="block">
             <!-- Menu lateral -->
+<<<<<<< HEAD
             <!--<ui:include src="sideMenu.xhtml"/>-->
+=======
+            <ui:include src="sideMenu.xhtml"/>
+>>>>>>> e7c884d1ebeb3ffe5545efd1572c0a3633f10e2a
             
             <h:panelGroup layout="block" class="page-content">
                 <!-- Menu Horizontal -->
@@ -54,6 +58,7 @@
                                                             <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
                                                             <h:panelGroup class="checkmark"></h:panelGroup>
                                                         </label>
+<<<<<<< HEAD
                                                         <form>
                                                             <button  action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
                                                                 <i class="fa fa-trash-o"></i>
@@ -65,6 +70,13 @@
                                                             </button>
                                                         </form>
                                                         <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
+=======
+                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
+                                                            <i class="fa fa-ellipsis-v"></i>
+                                                        </button>
+
+                                                            <p:accordionPanel activeIndex="null" class="dropdownlink">
+>>>>>>> e7c884d1ebeb3ffe5545efd1572c0a3633f10e2a
                                                             <p:tab title="#{item.nameItem}">
                                                                 <ul class="submenuItems">
                                                                     <li id="subItem" class="liDescricao">
@@ -81,6 +93,7 @@
 
                                                 <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
                                                     <li id = "#{item.identifierItem}">
+<<<<<<< HEAD
                                                         <form>
                                                             <button action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
                                                                 <i class="fa fa-trash-o"></i>
@@ -92,6 +105,13 @@
                                                             </button>
                                                         </form>
                                                         <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
+=======
+                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
+                                                            <i class="fa fa-ellipsis-v"></i>
+                                                        </button>
+
+                                                        <p:accordionPanel activeIndex="null" class="dropdownlink">
+>>>>>>> e7c884d1ebeb3ffe5545efd1572c0a3633f10e2a
                                                             <p:tab title="#{item.nameItem}" >
                                                                 <ul class="submenuItems">
                                                                     <li id="subItem" class="liDescricao">
@@ -115,6 +135,26 @@
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>
+        
+        <h:outputScript library="js" name="jquery.min.js" />
+        <h:outputScript library="js" name="jquery-ui.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="plugins.js" />
+        <h:outputScript library="js" name="actions.js"/>
+        <h:outputScript library="js" name="script.js"/>
+        <h:outputScript library="js" name="tagMenu.js"/>
+        <h:outputScript library="js" name="tags.js"/>
+        <h:outputScript library="js" name="configuracoes.js"/>
+        <h:outputScript library="js" name="modalOptions.js"/>
+        <h:outputScript library="js" name="filter.js"/>
+        <h:outputScript library="js" name="settings.js"/>
+        
     </h:body>
+<<<<<<< HEAD
    
+=======
+    
+    <p:dialog header="Opções de Item" widgetVar="dlg2" modal="true" width="590" height="170">
+    </p:dialog>   
+>>>>>>> e7c884d1ebeb3ffe5545efd1572c0a3633f10e2a
 </html>
