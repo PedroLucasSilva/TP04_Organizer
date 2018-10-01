@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://xmlns.jcp.org/jsf/facelets" 
+
+    xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ul class="x-navigation x-navigation-horizontal x-navigation-panel">
+        <li class="xn-icon-button">
+            <a href="#" class="x-navigation-minimize"><span class="fa fa-dedent"></span></a>
+        </li>
+
+        <!-- Pesquisa -->
+        <li class="xn-search">
+            <h:form>
+                <p:inputText id="pesquisar" placeholder="Pesquisar..." value="#{itemFilterMB.expression}">
+                    <p:ajax event="keyup" update="panel"></p:ajax>
+                </p:inputText>
+            </h:form>
+        </li>
+    </ul>
+</ui:composition>

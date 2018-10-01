@@ -19,15 +19,17 @@
         
         <h:panelGroup class="page-container" layout="block">
             <!-- Menu lateral -->
+            <ui:include src="sideMenu.xhtml"/>
             
             <h:panelGroup layout="block" class="page-content">
                 <!-- Menu Horizontal -->
+                <ui:include src="horizontalMenu.xhtml"/>
                 
-                <form id="createItemPageForm" action="/organizer/servletcontroller?process=LoadTagsToCreateItem" method="post"></form>
-                
+                <!--<form id="createItemPageForm" action="/organizer/servletcontroller?process=LoadTagsToCreateItem" method="post"></form>
+                -->
                 <h:panelGroup class="page-title"></h:panelGroup>
                 
-                <h:panelGroup layout="block" class="page-content-wrap">
+                <h:panelGroup layout="block" class="page-content-wrap" id="panel">
                     <h:panelGroup layout="block" class="row">
                         <h:panelGroup layout="block" class="col-md-12">
                             <h:panelGroup layout="block" class="panel panel-default">
@@ -39,51 +41,53 @@
                                         
                                         #{itemFilterMB.itemListFilter()}
                                         <ui:repeat var = "item" value = "#{itemFilterMB.itemList}">
-                                            <ui:fragment rendered="#{item.identifierItem eq 'TAR'}">
-                                                <li id = "#{item.identifierItem}">
-                                                    
-                                                    <label class="container" style="float:left">
-                                                        <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
-                                                        <h:panelGroup class="checkmark"></h:panelGroup>
-                                                    </label>
-                                                    <button id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal">
-                                                        <i class="fa fa-ellipsis-v"></i>
-                                                    </button>
-                                                    
-                                                    <p:accordionPanel activeIndex="null">
-                                                        <p:tab title="#{item.nameItem}">
-                                                            <ul class="submenuItems">
-                                                                <li id="subItem" class="liDescricao">
-                                                                    #{item.descriptionItem}
-                                                                </li>
-                                                                <li class="liDescricao" style="text-align: right">
-                                                                    #{item.dateItem}
-                                                                </li>
-                                                            </ul>
-                                                        </p:tab>
-                                                    </p:accordionPanel>
-                                                </li>
-                                            </ui:fragment>
-                                            
-                                            <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
-                                                <li id = "#{item.identifierItem}">
-                                                    <button id="#{item.seqItem}" value="#{item.nameItem}" class="opcoesItem btOption" data-toggle="modal" data-target="#btaoOpcaoModal">
-                                                        <i class="fa fa-ellipsis-v"></i>
-                                                    </button>
+                                            <ui:fragment rendered="#{itemFilterMB.nameFilter(item) eq 'true'}">
+                                                <ui:fragment rendered="#{item.identifierItem eq 'TAR'}">
+                                                    <li id = "#{item.identifierItem}">
 
-                                                    <p:accordionPanel activeIndex="null">
-                                                        <p:tab title="#{item.nameItem}" >
-                                                            <ul class="submenuItems">
-                                                                <li id="subItem" class="liDescricao">
-                                                                    #{item.descriptionItem}
-                                                                </li>
-                                                                <li class="liDescricao" style="text-align: right">
-                                                                    #{item.dateItem}
-                                                                </li>
-                                                            </ul>
-                                                        </p:tab>
-                                                    </p:accordionPanel>
-                                                </li>
+                                                        <label class="container" style="float:left">
+                                                            <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
+                                                            <h:panelGroup class="checkmark"></h:panelGroup>
+                                                        </label>
+                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
+                                                            <i class="fa fa-ellipsis-v"></i>
+                                                        </button>
+
+                                                            <p:accordionPanel activeIndex="null" class="dropdownlink">
+                                                            <p:tab title="#{item.nameItem}">
+                                                                <ul class="submenuItems">
+                                                                    <li id="subItem" class="liDescricao">
+                                                                        #{item.descriptionItem}
+                                                                    </li>
+                                                                    <li class="liDescricao" style="text-align: right">
+                                                                        #{item.dateItem}
+                                                                    </li>
+                                                                </ul>
+                                                            </p:tab>
+                                                        </p:accordionPanel>
+                                                    </li>
+                                                </ui:fragment>
+
+                                                <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
+                                                    <li id = "#{item.identifierItem}">
+                                                        <button action="#{itemMB.setItem(item)}" id="#{item.seqItem}" class="opcoesItem btOption" value="#{item.identifierItem}" data-toggle="modal" data-target="#btaoOpcaoModal" onclick="PF('dlg2').show();">
+                                                            <i class="fa fa-ellipsis-v"></i>
+                                                        </button>
+
+                                                        <p:accordionPanel activeIndex="null" class="dropdownlink">
+                                                            <p:tab title="#{item.nameItem}" >
+                                                                <ul class="submenuItems">
+                                                                    <li id="subItem" class="liDescricao">
+                                                                        #{item.descriptionItem}
+                                                                    </li>
+                                                                    <li class="liDescricao" style="text-align: right">
+                                                                        #{item.dateItem}
+                                                                    </li>
+                                                                </ul>
+                                                            </p:tab>
+                                                        </p:accordionPanel>
+                                                    </li>
+                                                </ui:fragment>
                                             </ui:fragment>
                                         </ui:repeat>
                                     </ul>
@@ -94,5 +98,22 @@
                 </h:panelGroup>
             </h:panelGroup>
         </h:panelGroup>
+        
+        <h:outputScript library="js" name="jquery.min.js" />
+        <h:outputScript library="js" name="jquery-ui.min.js" />
+        <h:outputScript library="js" name="bootstrap.min.js" />
+        <h:outputScript library="js" name="plugins.js" />
+        <h:outputScript library="js" name="actions.js"/>
+        <h:outputScript library="js" name="script.js"/>
+        <h:outputScript library="js" name="tagMenu.js"/>
+        <h:outputScript library="js" name="tags.js"/>
+        <h:outputScript library="js" name="configuracoes.js"/>
+        <h:outputScript library="js" name="modalOptions.js"/>
+        <h:outputScript library="js" name="filter.js"/>
+        <h:outputScript library="js" name="settings.js"/>
+        
     </h:body>
+    
+    <p:dialog header="Opções de Item" widgetVar="dlg2" modal="true" width="590" height="170">
+    </p:dialog>   
 </html>

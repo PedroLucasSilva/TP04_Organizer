@@ -1,0 +1,158 @@
+<ui:composition  xmlns:ui="http://java.sun.com/jsf/facelets"
+                 xmlns:h="http://xmlns.jcp.org/jsf/html"
+                 xmlns:f="http://xmlns.jcp.org/jsf/core"
+                 xmlns:p="http://primefaces.org/ui">
+
+    <h:panelGroup layout="block" class="page-sidebar">        
+
+        <ul class="x-navigation">
+
+            <li class="xn-logo">
+                <h:link  outcome="index" value="Organizer"/>
+                <h:link class="x-navigation-control"/>
+            </li>
+
+            <li class="xn-profile">
+                <h:link class="profile-mini">
+                    <h:graphicImage library="imgs" name="icon.jpg" />
+                </h:link>
+                <h:panelGroup layout="block" class="profile">
+                    <h:panelGroup layout="block" class="profile-image">
+                        <h:graphicImage library="imgs" name="icon.jpg" />
+                    </h:panelGroup>
+                    <h:panelGroup layout="block" class="profile-data">
+                        <h:panelGroup layout="block" class="profile-data-name">#{userMB.user.userName}</h:panelGroup>
+                        <h:panelGroup layout="block" class="profile-data-title">#{userMB.user.codEmail}</h:panelGroup>
+                    </h:panelGroup>
+                </h:panelGroup> 
+            </li>
+
+            <li>
+                <a href="/organizer/servletcontroller?process=LoadMax"><span class="fa fa-comments"></span> <span class="xn-text">Falar com o MAX</span></a>
+            </li>
+
+            <li class="xn-openable">
+                <h:link><span class="fa fa-adjust"></span> <span class="xn-text">Temas</span></h:link>
+                <ul>
+                    <li><h:link>
+                            <label class="container">Padrão                               
+                                <h:selectBooleanCheckbox id="padButton"/>
+                                <span class="checkmark"></span>
+                            </label>
+                        </h:link></li>
+                    <li><h:link>
+                            <label class="container">Elegante
+                                <h:selectBooleanCheckbox id="modButton"/>
+                                <span class="checkmark"></span>
+                            </label>
+                        </h:link></li>
+                    <li><h:link>
+                            <label class="container">Extravagante
+                                <h:selectBooleanCheckbox id="extButton"/>
+                                <span class="checkmark"></span>
+                            </label>
+                        </h:link></li>
+                </ul>
+            </li>
+
+            <li class="xn-openable">
+                <h:link><span class="fa fa-file-text-o"></span> <span class="xn-text">Tipos</span></h:link>
+
+                <ul id="ulTypes">
+
+                </ul>
+            </li>
+
+            <li class="xn-openable">
+                <h:link><span class="fa fa-tag"></span> <span class="xn-text">Tags</span></h:link>
+
+                <f:event listener="#{tagMB.listAllTag()}" type="preRenderView" />
+                
+                <ul id="ulTagMenu">
+                    <li>
+                        <a onclick="PF('insertTagModal').show();">
+                            <span class="fa fa-plus-square-o"></span> <span class="xn-text">Nova Tag</span>
+                        </a>
+                    </li>             
+                    <ui:repeat var = "list" value = "#{tagMB.tagList}" rendered="#{tagMB.tagList.size()>0}">
+                        <li class="tagLine"><a>
+                                <label class="container">#{list.tagName}
+                                    <h:selectBooleanCheckbox value="#{list.tagName}"></h:selectBooleanCheckbox>
+                                    <span class="checkmarkTarefa"></span>
+                                    <h:button class="buttonStyle delete" rendered="#{list.tagName != 'Concluidos'}" ><i class="glyphicon glyphicon-trash"></i></h:button>
+                                    <h:button class="buttonStyle editer" rendered="#{list.tagName != 'Concluidos'}" onclick="PF('updateTagModal').show();" ><i class="glyphicon glyphicon-cog"></i></h:button>
+                                </label>
+                            </a></li>
+                    </ui:repeat>
+                   <!-- <form method="post" id="formDel">
+                        <input type="hidden" id="takeTag" name="tagMenu"/>
+                    </form> -->
+                </ul>
+            </li>
+
+            <li>
+                <h:link outcome="settings"><span class="fa fa-cogs"></span> <span class="xn-text">Configurações</span></h:link>
+            </li>
+
+            <li>
+                <a onclick="PF('logoutModal').show();"><span class="fa fa-sign-out"></span> <span class="xn-text">Sair</span></a>
+            </li>
+
+        </ul>
+    </h:panelGroup>  
+        
+    <p:dialog header="Adicionar Tag:" widgetVar="insertTagModal" resizable="false">
+        <h:panelGroup layout="block" class="modal-dialog">
+                <h:panelGroup layout="block" class="modal-body">
+                    <h:form>
+                        <h:panelGroup layout="block" class="form-group">
+                            <label>Nome: </label>
+                            <h:panelGroup layout="block" class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-tag"></span></span>
+                                <h:inputText class="form-control" required="true" id="name" value="#{tagMB.tag.tagName}"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="modal-footer">
+                            <button class="btn btn-secondary" onclick="PF('insertTagModal').hide();">Cancelar</button>
+                            <h:commandButton class="btn btn-primary" value="OK" action="#{tagMB.createTag()}"></h:commandButton>
+                        </h:panelGroup>
+                    </h:form>
+                </h:panelGroup>          
+        </h:panelGroup>
+    </p:dialog>
+    
+    <p:dialog header="Editar Tag:" widgetVar="updateTagModal" modal="true" resizable="false">
+        <h:panelGroup layout="block" class="modal-dialog">
+                <h:panelGroup layout="block" class="modal-body">
+                    <h:form>
+                        <h:panelGroup layout="block" class="form-group">
+                            <label>Nome: </label>
+                            <h:panelGroup layout="block" class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-tag"></span></span>
+                                <h:inputText class="form-control" required="true" id="name" value="#{tagMB.tag.tagName}"/>
+                            </h:panelGroup>
+                        </h:panelGroup>
+                        <h:panelGroup layout="block" class="modal-footer">
+                            <button class="btn btn-secondary" onclick="PF('logoutModal').hide();">Cancelar</button>
+                            <h:commandButton class="btn btn-primary" value="OK" action="#{tagMB.updateTag()}"></h:commandButton>
+                        </h:panelGroup>
+                    </h:form>
+                </h:panelGroup>          
+        </h:panelGroup>
+    </p:dialog>
+    
+    <p:dialog header="Logout:" widgetVar="logoutModal" modal="true" resizable="false">
+        <h:panelGroup layout="block" class="modal-dialog">
+            <h:panelGroup layout="block" class="modal-body">
+                <h:form>
+                    <p>Até logo! Deseja sair da sua conta? </p>
+                    <h:panelGroup layout="block" class="modal-footer">
+                        <button class="btn btn-secondary" onclick="PF('logoutModal').hide();">Cancelar</button>
+                        <h:commandButton class="btn btn-primary" value="Sair" action="#{loginMB.userLogout()}"></h:commandButton>
+                    </h:panelGroup>
+                </h:form>
+            </h:panelGroup>
+        </h:panelGroup>
+    </p:dialog>
+    
+</ui:composition>
