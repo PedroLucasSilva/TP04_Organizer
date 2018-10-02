@@ -166,6 +166,7 @@ public class ItemMB implements Serializable{
         
         updateTagInItem(arrOldTags, idItem);
         
+        item.setUser(user.getCurrentUser());
         success = keepItem.updateItem(item);
        
         if (success) {
