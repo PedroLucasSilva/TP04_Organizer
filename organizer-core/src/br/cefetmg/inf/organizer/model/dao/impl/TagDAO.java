@@ -58,7 +58,7 @@ public class TagDAO implements ITagDAO {
     @Override
     public boolean updateTag(Tag tag) throws PersistenceException {
         try (Connection connection = ConnectionManager.getInstance().getConnection()) {
-            String sql = "UPDATE tag SET nom_tag=? WHERE cod_email=? and seq_tag=?";
+            String sql = "UPDATE tag SET nom_tag=? WHERE seq_tag=?";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 preparedStatement.setString(1, tag.getTagName());

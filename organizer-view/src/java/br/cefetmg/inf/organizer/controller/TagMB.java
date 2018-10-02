@@ -55,6 +55,10 @@ public class TagMB implements Serializable {
         tag.setUser(currentUser.getCurrentUser());
         boolean success = keepTag.createTag(tag);
         
+        if(success){
+            tag.setSeqTag(keepTag.searchTagByName(tag.getTagName(), tag.getUser()));
+        }
+        
         if (success) {
             return "true";
         } else {
@@ -92,7 +96,7 @@ public class TagMB implements Serializable {
          boolean success;
          tagList = keepTag.listAlltag(currentUser.getCurrentUser());
          
-         success = !tagList.isEmpty();
+        success = !tagList.isEmpty();
                   
         if (success) {
             return "true";
