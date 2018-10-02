@@ -18,6 +18,9 @@
             .ui-state-default{
                 background-color: white;
             }
+            .ui-button-icon-only .ui-button-text {
+                padding: .0em;
+            }
         </style>
     </h:head>
     <h:body>
@@ -29,9 +32,7 @@
             <h:panelGroup layout="block" class="page-content">
                 <!-- Menu Horizontal -->
                 <ui:include src="horizontalMenu.xhtml"/>
-                
-                <!--<form id="createItemPageForm" action="/organizer/servletcontroller?process=LoadTagsToCreateItem" method="post"></form>
-                -->
+               
                 <h:panelGroup class="page-title"></h:panelGroup>
                 
                 <h:panelGroup layout="block" class="page-content-wrap" id="panel">
@@ -54,16 +55,12 @@
                                                             <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
                                                             <h:panelGroup class="checkmark"></h:panelGroup>
                                                         </label>
-                                                        <form>
-                                                            <button  action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
-                                                                <i class="fa fa-trash-o"></i>
-                                                            </button>
-                                                        </form>
-                                                        <form>
-                                                            <button action="#{itemMB.redirectToUpdate(item.seqItem)}" class="opcoesItem btOption" value="#{item.identifierItem}">
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
-                                                        </form>
+                                                        <h:form>
+                                                            <p:commandButton action="#{itemMB.deleteItem(item.seqItem)}" icon="fa fa-trash-o" class="opcoesItem btOption" ajax="false" />
+                                                        </h:form>
+                                                        <h:form>
+                                                            <p:commandButton action="#{itemMB.redirectToUpdate(item.seqItem)}" icon="fa fa-edit" class="opcoesItem btOption" ajax="false" />
+                                                        </h:form>                                                        
                                                         <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
                                                             <p:tab title="#{item.nameItem}">
                                                                 <ul class="submenuItems">
@@ -81,16 +78,12 @@
 
                                                 <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
                                                     <li id = "#{item.identifierItem}">
-                                                        <form>
-                                                            <button action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
-                                                                <i class="fa fa-trash-o"></i>
-                                                            </button>
-                                                        </form>
-                                                        <form>
-                                                            <button action="#{itemMB.redirectToUpdate(item.seqItem)}" class="opcoesItem btOption" value="#{item.identifierItem}">
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
-                                                        </form>
+                                                        <h:form>
+                                                            <p:commandButton action="#{itemMB.deleteItem(item.seqItem)}" icon="fa fa-trash-o" class="opcoesItem btOption" ajax="false" />
+                                                        </h:form>
+                                                        <h:form>
+                                                            <p:commandButton action="#{itemMB.redirectToUpdate(item.seqItem)}" icon="fa fa-edit" class="opcoesItem btOption" ajax="false" />
+                                                        </h:form>
                                                         <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
                                                             <p:tab title="#{item.nameItem}" >
                                                                 <ul class="submenuItems">
