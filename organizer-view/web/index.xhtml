@@ -27,12 +27,20 @@
         
         <h:panelGroup class="page-container" layout="block">
             <!-- Menu lateral -->
-            <ui:include src="sideMenu.xhtml"/>
+            <ui:include src="sideMenu.xhtml">
+                <ui:param name="pageName" value="index.jsf"/>
+            </ui:include>
             
             <h:panelGroup layout="block" class="page-content">
                 <!-- Menu Horizontal -->
+<<<<<<< HEAD
                 <ui:include src="horizontalMenu.xhtml"/>
                
+=======
+                <ui:include src="horizontalMenu.xhtml">
+                    <ui:param name="pageName" value="index.jsf"/>
+                </ui:include>
+>>>>>>> d613574e7e7c66964823622161d2a621be04610a
                 <h:panelGroup class="page-title"></h:panelGroup>
                 
                 <h:panelGroup layout="block" class="page-content-wrap" id="panel">
@@ -50,17 +58,30 @@
                                             <ui:fragment rendered="#{itemFilterMB.nameFilter(item) eq 'true'}">
                                                 <ui:fragment rendered="#{item.identifierItem eq 'TAR'}">
                                                     <li id = "#{item.identifierItem}">
+<<<<<<< HEAD
 
                                                         <label class="container" style="float:left">
                                                             <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
                                                             <h:panelGroup class="checkmark"></h:panelGroup>
                                                         </label>
+=======
+                                                        <h:outputLabel class="container" style="float:left">
+                                                            <h:selectBooleanCheckbox styleClass="hide">
+                                                                <p:ajax event="click" update="panel" listener="#{itemMB.concludeTarefa(item)}"/>
+                                                            </h:selectBooleanCheckbox>
+                                                            <span class="checkmarkTarefa"></span>
+                                                        </h:outputLabel>
+>>>>>>> d613574e7e7c66964823622161d2a621be04610a
                                                         <h:form>
                                                             <p:commandButton action="#{itemMB.deleteItem(item.seqItem)}" icon="fa fa-trash-o" class="opcoesItem btOption" ajax="false" />
                                                         </h:form>
                                                         <h:form>
                                                             <p:commandButton action="#{itemMB.redirectToUpdate(item.seqItem)}" icon="fa fa-edit" class="opcoesItem btOption" ajax="false" />
+<<<<<<< HEAD
                                                         </h:form>                                                        
+=======
+                                                        </h:form>
+>>>>>>> d613574e7e7c66964823622161d2a621be04610a
                                                         <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
                                                             <p:tab title="#{item.nameItem}">
                                                                 <ul class="submenuItems">

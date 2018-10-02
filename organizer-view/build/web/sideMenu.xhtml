@@ -65,6 +65,32 @@
                 <h:link><h:outputText styleClass="fa fa-file-text-o"/> <h:outputText styleClass="xn-text" value="Tipos"/></h:link>
 
                 <ul id="ulTypes">
+                    <li><a href="#">
+                        <h:outputLabel class="container">Simples
+                            <h:selectBooleanCheckbox>
+                                <p:ajax event="click" update="panel" listener="#{itemFilterMB.changeTypeList('SIM')}" disabled="#{pageName ne 'index.jsf'}"/>
+                            </h:selectBooleanCheckbox>
+                            <span class="checkmarkTarefa"></span>
+                        </h:outputLabel>
+                    </a></li>
+                    
+                    <li><a href="#">
+                        <h:outputLabel class="container">Lembrete
+                            <h:selectBooleanCheckbox>
+                                <p:ajax event="click" update="panel" listener="#{itemFilterMB.changeTypeList('LEM')}" disabled="#{pageName ne 'index.jsf'}"/>
+                            </h:selectBooleanCheckbox>
+                            <span class="checkmarkTarefa"></span>
+                        </h:outputLabel>
+                    </a></li>
+                    
+                    <li><a href="#">
+                        <h:outputLabel class="container">Tarefa
+                            <h:selectBooleanCheckbox>
+                                <p:ajax event="click" update="panel" listener="#{itemFilterMB.changeTypeList('TAR')}" disabled="#{pageName ne 'index.jsf'}"/>
+                            </h:selectBooleanCheckbox>
+                            <span class="checkmarkTarefa"></span>
+                        </h:outputLabel>
+                    </a></li>
 
                 </ul>
             </li>
@@ -72,7 +98,6 @@
             <li class="xn-openable">
                 <h:link><h:outputText styleClass="fa fa-tag"/> <h:outputLabel styleClass="xn-text" value="Tags"/></h:link>
 
-                <f:event listener="#{tagMB.listAllTag()}" type="preRenderView"/>
                 
                 <ul id="ulTagMenu">
                     <li>
@@ -80,11 +105,13 @@
                             <h:outputText styleClass="fa fa-plus-square-o"/> <h:outputText styleClass="xn-text" value="Nova Tag"/>
                         </a>
                     </li>             
-                    <ui:repeat var = "list" value = "#{tagMB.tagList}" rendered="#{tagMB.tagList.size()>0}">
+                    <ui:repeat var = "list" value = "#{itemFilterMB.listAllTags()}" rendered="#{itemFilterMB.listAllTags().size()>0}">
                         <li class="tagLine">
                             <a>
                                 <h:outputLabel styleClass="container" value="#{list.tagName}">
-                                    <h:selectBooleanCheckbox value="#{list.tagName}"></h:selectBooleanCheckbox>
+                                    <h:selectBooleanCheckbox value="#{list.tagName}">
+                                        <p:ajax event="click" update="panel" listener="#{itemFilterMB.changeTagList(list.seqTag)}" disabled="#{pageName ne 'index.jsf'}"/>
+                                    </h:selectBooleanCheckbox>
                                     <h:outputText styleClass="checkmarkTarefa"/>
                                     <ui:fragment rendered="#{list.tagName != 'Concluidos'}">
                                         <button class="buttonStyle delete" ><i class="glyphicon glyphicon-trash"></i></button>
