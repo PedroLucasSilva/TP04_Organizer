@@ -22,7 +22,7 @@ function addTagInputSelected(tagSelected) {
 }
 
 function checkList() {
-    let listTags = $("#tagSelected").val();
+    let listTags = $("#dialogForm\\:tagSelected").val();
     let arrCheckTagsPresents = $('.checkTags:checked');
     let listTagsPresents = "";
 
@@ -36,7 +36,7 @@ function checkList() {
     listTags.pop();
 
     if (listTags.length != arrCheckTagsPresents.length) {
-        document.querySelector('#tagSelected').value = listTagsPresents;
+        document.getElementById('dialogForm:tagSelected').value = listTagsPresents;
     }
 
 }
