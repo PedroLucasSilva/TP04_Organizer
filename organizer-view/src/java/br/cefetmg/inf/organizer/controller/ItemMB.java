@@ -281,5 +281,44 @@ public class ItemMB implements Serializable{
         }
     
     }   
+    
+    public void concludeTarefa(Item item) throws PersistenceException, BusinessException{
+        item.setIdentifierStatus("C");
+        item.setUser(user.getCurrentUser());
+        
+        boolean result = keepItem.updateItem(item);
+        
+        if(!result){
+            /*
+            ErrorObject error = new ErrorObject();
+            error.setErrorName("Tente novamente");
+            error.setErrorDescription("Erro ao concluir tarefa");
+            error.setErrorSubtext("Não foi possível concluir a tarefa.");
+            req.getSession().setAttribute("error", error);
+            pageJSP = "/error.jsp";
+            */
+        } else {
+            Long idConclude = keepTag.searchTagByName("Concluidos", user.getCurrentUser());
+            Tag concludeTag = keepTag.searchTagById(idConclude);
+            ArrayList<Tag> tag = new ArrayList();
+            tag.add(concludeTag);
+           
+            itemTag.setItem(item);
+            itemTag.setListTags(tag);
+            
+            result = keepItemTag.createTagInItem(itemTag);
+            
+            if(!result){
+                /*
+                ErrorObject error = new ErrorObject();
+                error.setErrorName("Tente novamente");
+                error.setErrorDescription("Erro ao concluir tarefa");
+                error.setErrorSubtext("Não foi possível concluir a tarefa.");
+                req.getSession().setAttribute("error", error);
+                pageJSP = "/error.jsp";
+                */
+            }
+        }
+    }
 }
     

@@ -5,7 +5,10 @@ import br.cefetmg.inf.organizer.model.domain.Item;
 import br.cefetmg.inf.organizer.model.domain.Tag;
 import br.cefetmg.inf.organizer.model.domain.User;
 import br.cefetmg.inf.organizer.model.service.IKeepItem;
+import br.cefetmg.inf.organizer.model.service.IKeepTag;
 import br.cefetmg.inf.organizer.proxy.KeepItemProxy;
+import br.cefetmg.inf.organizer.proxy.KeepTagProxy;
+import br.cefetmg.inf.util.exception.BusinessException;
 import br.cefetmg.inf.util.exception.PersistenceException;
 import java.net.SocketException;
 import java.net.UnknownHostException;
@@ -17,6 +20,7 @@ import javax.faces.bean.RequestScoped;
 import javax.inject.Named;
 import javax.faces.bean.ViewScoped;
 import java.io.Serializable;
+import java.util.Iterator;
 
 @Named(value = "itemFilterMB")
 @ManagedBean
@@ -26,6 +30,7 @@ public class ItemFilterMB implements Serializable {
     ArrayList<Tag> tagList;
     ArrayList<String> typeList;
     IKeepItem keepItem;
+    IKeepTag keepTag;
     @ManagedProperty(value="#{loginMB}")
     LoginMB login;
     String expression;
@@ -36,6 +41,7 @@ public class ItemFilterMB implements Serializable {
         typeList = new ArrayList<>();
         keepItem = new KeepItemProxy();
         expression = new String();
+        keepTag = new KeepTagProxy();
     }
 
     public String getExpression() {
@@ -84,6 +90,14 @@ public class ItemFilterMB implements Serializable {
 
     public void setLogin(LoginMB login) {
         this.login = login;
+    }
+    
+    public IKeepTag getKeepTag() {
+        return keepTag;
+    }
+
+    public void setKeepTag(IKeepTag keepTag) {
+        this.keepTag = keepTag;
     }
     
     public void itemListFilter(){
@@ -177,13 +191,34 @@ public class ItemFilterMB implements Serializable {
         }
     }
     
-    public void changeTagList(Tag tag){
-        //se o tipo não estiver na lista, adiciona
-        if(!tagList.contains(tag)){
+    public void changeTagList(Long seqTag) throws PersistenceException, BusinessException, SocketException, UnknownHostException{
+        Tag tag = keepTag.searchTagById(seqTag);
+        tag.setUser(login.getCurrentUser());
+        
+        ArrayList<Long> seqTagList = new ArrayList<>();
+        
+        for(Tag obj : tagList){
+            seqTagList.add(obj.getSeqTag());
+        }
+        
+        //se a tag não estiver na lista, adiciona
+        if(!seqTagList.contains(tag.getSeqTag())){
             tagList.add(tag);
         }else{
-            //se o tipo ja estiver na lista, remove
-            tagList.remove(tag);
+            //se a tag ja estiver na lista, remove
+            Iterator<Tag> iter = tagList.iterator();
+
+            while (iter.hasNext()) {
+                Tag obj = iter.next();
+
+                if (obj.getSeqTag().equals(tag.getSeqTag())){
+                    iter.remove();
+                }
+            }
         }
+    }
+    
+    public ArrayList<Tag> listAllTags() throws PersistenceException, BusinessException{
+         return keepTag.listAlltag(login.getCurrentUser());
     }
 }

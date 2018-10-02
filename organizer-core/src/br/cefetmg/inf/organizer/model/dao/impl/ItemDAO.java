@@ -314,8 +314,8 @@ public class ItemDAO implements IItemDAO {
             //removing the last " OR " from the string
             sqlConditions = sqlConditions.substring(0, sqlConditions.lastIndexOf(" OR "));
 
-            String sql = "SELECT * FROM item WHERE " + sqlConditions
-                    + " AND cod_email = ? ORDER BY dat_item";
+            String sql = "SELECT * FROM item WHERE (" + sqlConditions
+                    + ") AND cod_email = ? ORDER BY dat_item";
 
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
                 int i;

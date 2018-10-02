@@ -24,11 +24,16 @@
         
         <h:panelGroup class="page-container" layout="block">
             <!-- Menu lateral -->
-            <ui:include src="sideMenu.xhtml"/>
+            <ui:include src="sideMenu.xhtml">
+                <ui:param name="pageName" value="index.jsf"/>
+            </ui:include>
             
             <h:panelGroup layout="block" class="page-content">
                 <!-- Menu Horizontal -->
-                <ui:include src="horizontalMenu.xhtml"/>
+                
+                <ui:include src="horizontalMenu.xhtml">
+                    <ui:param name="pageName" value="index.jsf"/>
+                </ui:include>
                 
                 <!--<form id="createItemPageForm" action="/organizer/servletcontroller?process=LoadTagsToCreateItem" method="post"></form>
                 -->
@@ -49,20 +54,15 @@
                                             <ui:fragment rendered="#{itemFilterMB.nameFilter(item) eq 'true'}">
                                                 <ui:fragment rendered="#{item.identifierItem eq 'TAR'}">
                                                     <li id = "#{item.identifierItem}">
-
-                                                        <label class="container" style="float:left">
-                                                            <input id="#{item.seqItem}" class="checkTar" type="checkbox" name="tarefa" value="#{item.nameItem}"/>
-                                                            <h:panelGroup class="checkmark"></h:panelGroup>
-                                                        </label>
+                                                        <h:outputLabel class="container" style="float:left">
+                                                            <h:selectBooleanCheckbox styleClass="hide">
+                                                                <p:ajax event="click" update="panel" listener="#{itemMB.concludeTarefa(item)}"/>
+                                                            </h:selectBooleanCheckbox>
+                                                            <span class="checkmarkTarefa"></span>
+                                                        </h:outputLabel>
                                                         <form>
-                                                            <button  action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
-                                                                <i class="fa fa-trash-o"></i>
-                                                            </button>
                                                         </form>
                                                         <form>
-                                                            <button action="#{itemMB.redirectToUpdate(item.seqItem)}" class="opcoesItem btOption" value="#{item.identifierItem}">
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
                                                         </form>
                                                         <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
                                                             <p:tab title="#{item.nameItem}">
@@ -82,14 +82,8 @@
                                                 <ui:fragment rendered="#{item.identifierItem ne 'TAR'}">
                                                     <li id = "#{item.identifierItem}">
                                                         <form>
-                                                            <button action="#{itemMB.deleteItem(item.seqItem)}" class="opcoesItem btOption">
-                                                                <i class="fa fa-trash-o"></i>
-                                                            </button>
                                                         </form>
                                                         <form>
-                                                            <button action="#{itemMB.redirectToUpdate(item.seqItem)}" class="opcoesItem btOption" value="#{item.identifierItem}">
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
                                                         </form>
                                                         <p:accordionPanel activeIndex="null" style="width:80%;" class="dropdownlink">
                                                             <p:tab title="#{item.nameItem}" >

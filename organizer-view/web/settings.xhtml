@@ -18,14 +18,19 @@
     <h:body>
         <h:panelGroup class="page-container" layout="block">
             <!-- Menu lateral -->
-            <ui:include src="sideMenu.xhtml"/>
+            <ui:include src="sideMenu.xhtml">
+                <ui:param name="pageName" value="settings.jsf"/>
+            </ui:include>
 
             <h:panelGroup layout="block" class="page-content">
                 <!-- Menu Horizontal -->
+                <ui:include src="horizontalMenu.xhtml">
+                    <ui:param name="pageName" value="settings.jsf"/>
+                </ui:include>
                 
                 <h:panelGroup class="page-title"></h:panelGroup>
                 
-                <h:panelGroup layout="block" class="page-content-wrap">
+                <h:panelGroup layout="block" class="page-content-wrap" id="panel">
 
                     <h:panelGroup layout="block" class="row">
                         <h:panelGroup layout="block" class="col-md-12">

@@ -16,7 +16,7 @@
         <li class="xn-search">
             <h:form>
                 <p:inputText id="pesquisar" placeholder="Pesquisar..." value="#{itemFilterMB.expression}">
-                    <p:ajax event="keyup" update="panel"></p:ajax>
+                    <p:ajax event="keyup" update="panel" disabled="#{pageName ne 'index.jsf'}"></p:ajax>
                 </p:inputText>
             </h:form>
         </li>
