@@ -16,7 +16,8 @@ function addTagInputSelected(tagSelected) {
     let listTags = $("#tagSelected").val();
     listTags += " " + tagSelected + ";";
 
-    document.querySelector('#tagSelected').value = listTags;
+    document.getElementById('dialogForm:tagSelected').value = listTags;
+    document.getElementById('dialogForm:paramTag').value = listTags;
 
 }
 

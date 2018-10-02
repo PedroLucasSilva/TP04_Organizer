@@ -94,6 +94,7 @@
         -->
           
         <p:dialog header="Adicionar Tags:" widgetVar="selectTags" width="500">
+          <h:form id="dialogForm">
             <h:panelGroup layout="block" class="modal-body">
                 <h:panelGroup class="form-group" layout="block">
                     <label>Selecionados: </label>
@@ -117,8 +118,11 @@
                 </h:panelGroup>
                 <hr></hr>                
                 <h:commandButton value="Cancelar" onclick="PF('selectTags').hide();" class="btn btn-secondary" />
-                <h:commandButton value="Salvar"  onclick="insertTagsOnInput(); PF('selectTags').hide();" class="btn btn-primary pull-right"/>               
+                <h:commandButton action="#{itemMB.teste}" value="Salvar"  onclick="insertTagsOnInput(); PF('selectTags').hide();" class="btn btn-primary pull-right">
+                    <f:param id="paramTag" name="action"/>
+                </h:commandButton>
             </h:panelGroup>
+            </h:form>  
         </p:dialog>
         
         <h:outputScript library="js" name="jquery.min.js" />

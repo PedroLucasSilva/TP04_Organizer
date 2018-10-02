@@ -17,6 +17,7 @@ import java.net.SocketException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Map;
 import javax.el.ELContext;
 import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
@@ -35,7 +36,6 @@ public class ItemMB implements Serializable{
     private IKeepItemTag keepItemTag;
     private String listTag;
     private String selectType;
-    String idItemString;
     private ArrayList<Tag> tagItem;
 
     public ItemMB() throws SocketException, UnknownHostException {
@@ -47,7 +47,6 @@ public class ItemMB implements Serializable{
         this.keepItemTag = new KeepItemTagProxy();
         this.listTag = "";
         this.selectType = "";
-        this.idItemString = "";
         this.tagItem = new ArrayList();
         FacesContext context = FacesContext.getCurrentInstance();
         ELContext elContext = context.getELContext();
@@ -69,15 +68,7 @@ public class ItemMB implements Serializable{
     public String getSelectType() {
         return selectType;
     }
-    
-    public void setIdItemString(String idItemString) {
-        this.idItemString = idItemString;
-    }
-    
-    public String getIdItemString() {
-        return idItemString;
-    }
-
+ 
     public String getListTag() {
         return listTag;
     }
@@ -154,7 +145,6 @@ public class ItemMB implements Serializable{
     public String updateItem() throws PersistenceException, BusinessException{
         
         boolean success = false;
-        Long idItem = Long.parseLong(idItemString); 
         
         ArrayList<Tag> arrOldTags;
         
@@ -162,9 +152,9 @@ public class ItemMB implements Serializable{
             insertTagInItem();
         }
         
-        arrOldTags = keepItemTag.listAllTagInItem(idItem);
+        arrOldTags = keepItemTag.listAllTagInItem(item.getSeqItem());
         
-        updateTagInItem(arrOldTags, idItem);
+        updateTagInItem(arrOldTags, item.getSeqItem());
         
         item.setUser(user.getCurrentUser());
         success = keepItem.updateItem(item);
@@ -281,6 +271,12 @@ public class ItemMB implements Serializable{
             success = keepItemTag.createTagInItem(itemTag);
         }
     
-    }   
+    }
+    
+    public void teste(){
+        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+	String action = params.get("action");
+        System.out.println("olaola : " + action);
+    }
 }
     
