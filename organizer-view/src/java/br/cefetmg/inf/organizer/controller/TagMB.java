@@ -81,6 +81,11 @@ public class TagMB implements Serializable {
     
     public String deleteTag() throws PersistenceException, BusinessException {
         
+        String value = FacesContext.getCurrentInstance().
+		getExternalContext().getRequestParameterMap().get("idOldTag");
+        tag.setUser(currentUser.getCurrentUser());
+        tag.setSeqTag(Long.parseLong(value));
+        
         boolean success = keepTag.deleteTag(tag);
         
         if (success) {

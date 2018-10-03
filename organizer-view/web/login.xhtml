@@ -15,11 +15,6 @@
         <link rel="StyleSheet" type="text/css" href="css/styles.css"/>
     </h:head>
     <h:body>
-        <c:if test="#{facesContext.externalContext != null}">
-            <c:if test="#{loginMB.currentUser.codEmail.length() > 0}">
-                #{facesContext.externalContext.dispatch("index.jsf")}
-            </c:if>
-        </c:if>
         <h:panelGroup layout="block" class="login-container">
 
             <h:panelGroup layout="block" class="login-box animated fadeInDown">

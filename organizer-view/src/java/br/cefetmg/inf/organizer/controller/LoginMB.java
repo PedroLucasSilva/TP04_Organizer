@@ -6,6 +6,7 @@ import br.cefetmg.inf.organizer.proxy.KeepUserProxy;
 import br.cefetmg.inf.util.PasswordCriptography;
 import br.cefetmg.inf.util.exception.BusinessException;
 import br.cefetmg.inf.util.exception.PersistenceException;
+import java.io.IOException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -55,9 +56,10 @@ public class LoginMB implements Serializable {
         }
     }
     
-    public void userLogout(){
+    public void userLogout() throws IOException{
         currentUser = null;
         FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        FacesContext.getCurrentInstance().getExternalContext().redirect("login.jsf");
     }
     
     

@@ -271,14 +271,7 @@ public class ItemMB implements Serializable{
             success = keepItemTag.createTagInItem(itemTag);
         }
     
-    }
-    
-    public void teste(){
-        Map<String,String> params = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
-	String action = params.get("action");
-        System.out.println("olaola : " + action);
-
-    }   
+    } 
     
     public void concludeTarefa(Item item) throws PersistenceException, BusinessException{
         item.setIdentifierStatus("C");
